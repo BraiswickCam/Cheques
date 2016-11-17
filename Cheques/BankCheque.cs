@@ -87,5 +87,14 @@ namespace Cheques
             sr.Close();
             return bc.ToArray();
         }
+
+        //NEEDS TESTING!!
+        //
+        //private BankCheque[] SortArray()
+        //{
+        //    BankCheque[] sorted = this.Results;
+        //    Array.Sort(sorted, delegate (BankCheque x, BankCheque y) { return x.Value.CompareTo(y.Value); });
+        //    return sorted;
+        //}
     }
 }
