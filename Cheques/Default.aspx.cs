@@ -40,23 +40,7 @@ namespace Cheques
                     bl.VisaTotal);
             }
 
-            DataTable dt = new DataTable();
-            dt.Columns.Add("Job No.", typeof(string));
-            dt.Columns.Add("School Name", typeof(string));
-            dt.Columns.Add("Pack", typeof(string));
-            dt.Columns.Add("Banked", typeof(double));
-            dt.Columns.Add("Discount", typeof(double));
-
-            double grandTotal = 0, grandDiscount = 0;
-            foreach (BankList bl in records)
-            {
-                dt.Rows.Add(new object[] { bl.JobNo, bl.School, bl.PackType, bl.CashChequeTotal, bl.Discount });
-                grandTotal += bl.CashChequeTotal;
-                grandDiscount += bl.Discount;
-            }
-            dt.Rows.Add(new object[] { "", "", "TOTAL", grandTotal, grandDiscount });
-
-            schoolList.DataSource = dt;
+            schoolList.DataSource = blr.SchoolListTable();
             schoolList.DataBind();
         }
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.IO;
+using System.Data;
 
 namespace Cheques
 {
@@ -197,6 +198,27 @@ namespace Cheques
             sr.Dispose();
             sr.Close();
             return bl.ToArray();
+        }
+
+        public DataTable SchoolListTable()
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Job No.", typeof(string));
+            dt.Columns.Add("School Name", typeof(string));
+            dt.Columns.Add("Pack", typeof(string));
+            dt.Columns.Add("Banked", typeof(double));
+            dt.Columns.Add("Discount", typeof(double));
+
+            double grandTotal = 0, grandDiscount = 0;
+            foreach (BankList bl in this.Results)
+            {
+                dt.Rows.Add(new object[] { bl.JobNo, bl.School, bl.PackType, bl.CashChequeTotal, bl.Discount });
+                grandTotal += bl.CashChequeTotal;
+                grandDiscount += bl.Discount;
+            }
+            dt.Rows.Add(new object[] { "", "", "TOTAL", grandTotal, grandDiscount });
+
+            return dt;
         }
     }
 }
