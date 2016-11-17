@@ -55,49 +55,109 @@ namespace Cheques
             this.PackType = values[4];
 
             try { this.CashChequeTotal = Convert.ToDouble(values[5]); }
-            catch (System.FormatException) { throw new FormatException("CashChequeTotal is not a valid double"); }
+            catch (System.FormatException)
+            {
+                if (values[5] == string.Empty) { this.CashChequeTotal = 0; }
+                else { throw new FormatException("CashChequeTotal is not a valid double"); }
+            }
 
             try { this.Discount = Convert.ToDouble(values[6]); }
-            catch (System.FormatException) { throw new FormatException("Discount is not a valid double"); }
+            catch (System.FormatException)
+            {
+                if (values[6] == string.Empty) { this.Discount = 0; }
+                else { throw new FormatException("Discount is not a valid double"); }
+            }
 
             try { this.Notes50 = Convert.ToDouble(values[7]); }
-            catch (System.FormatException) { throw new FormatException("Notes50 is not a valid double"); }
+            catch (System.FormatException)
+            {
+                if (values[7] == string.Empty) { this.Notes50 = 0; }
+                else { throw new FormatException("Notes50 is not a valid double"); }
+            }
 
             try { this.Notes20 = Convert.ToDouble(values[8]); }
-            catch (System.FormatException) { throw new FormatException("Notes20 is not a valid double"); }
+            catch (System.FormatException)
+            {
+                if (values[8] == string.Empty) { this.Notes20 = 0; }
+                else { throw new FormatException("Notes20 is not a valid double"); }
+            }
 
             try { this.Notes10 = Convert.ToDouble(values[9]); }
-            catch (System.FormatException) { throw new FormatException("Notes10 is not a valid double"); }
+            catch (System.FormatException)
+            {
+                if (values[9] == string.Empty) { this.Notes10 = 0; }
+                else { throw new FormatException("Notes10 is not a valid double"); }
+            }
 
             try { this.Notes5 = Convert.ToDouble(values[10]); }
-            catch (System.FormatException) { throw new FormatException("Notes5 is not a valid double"); }
+            catch (System.FormatException)
+            {
+                if (values[10] == string.Empty) { this.Notes5 = 0; }
+                else { throw new FormatException("Notes5 is not a valid double"); }
+            }
 
             try { this.Coins2 = Convert.ToDouble(values[11]); }
-            catch (System.FormatException) { throw new FormatException("Coins2 is not a valid double"); }
+            catch (System.FormatException)
+            {
+                if (values[11] == string.Empty) { this.Coins2 = 0; }
+                else { throw new FormatException("Coins2 is not a valid double"); }
+            }
 
             try { this.Coins1 = Convert.ToDouble(values[12]); }
-            catch (System.FormatException) { throw new FormatException("Coins1 is not a valid double"); }
+            catch (System.FormatException)
+            {
+                if (values[12] == string.Empty) { this.Coins1 = 0; }
+                else { throw new FormatException("Coins1 is not a valid double"); }
+            }
 
             try { this.Coins50 = Convert.ToDouble(values[13]); }
-            catch (System.FormatException) { throw new FormatException("Coins50 is not a valid double"); }
+            catch (System.FormatException)
+            {
+                if (values[13] == string.Empty) { this.Coins50 = 0; }
+                else { throw new FormatException("Coins50 is not a valid double"); }
+            }
 
             try { this.Coins20 = Convert.ToDouble(values[14]); }
-            catch (System.FormatException) { throw new FormatException("Coins20 is not a valid double"); }
+            catch (System.FormatException)
+            {
+                if (values[14] == string.Empty) { this.Coins20 = 0; }
+                else { throw new FormatException("Coins20 is not a valid double"); }
+            }
 
             try { this.Coins10 = Convert.ToDouble(values[15]); }
-            catch (System.FormatException) { throw new FormatException("Coins10 is not a valid double"); }
+            catch (System.FormatException)
+            {
+                if (values[15] == string.Empty) { this.Coins10 = 0; }
+                else { throw new FormatException("Coins10 is not a valid double"); }
+            }
 
             try { this.Coins5 = Convert.ToDouble(values[16]); }
-            catch (System.FormatException) { throw new FormatException("Coins5 is not a valid double"); }
+            catch (System.FormatException)
+            {
+                if (values[16] == string.Empty) { this.Coins5 = 0; }
+                else { throw new FormatException("Coins5 is not a valid double"); }
+            }
 
             try { this.CoinsBronze = Convert.ToDouble(values[17]); }
-            catch (System.FormatException) { throw new FormatException("CoinsBronze is not a valid double"); }
+            catch (System.FormatException)
+            {
+                if (values[17] == string.Empty) { this.CoinsBronze = 0; }
+                else { throw new FormatException("CoinsBronze is not a valid double"); }
+            }
 
             try { this.ChequeTotal = Convert.ToDouble(values[18]); }
-            catch (System.FormatException) { throw new FormatException("ChequeTotal is not a valid double"); }
+            catch (System.FormatException)
+            {
+                if (values[18] == string.Empty) { this.ChequeTotal= 0; }
+                else { throw new FormatException("ChequeTotal is not a valid double"); }
+            }
 
             try { this.VisaTotal = Convert.ToDouble(values[19]); }
-            catch (System.FormatException) { throw new FormatException("VisaTotal is not a valid double"); }
+            catch (System.FormatException)
+            {
+                if (values[19] == string.Empty) { this.VisaTotal = 0; }
+                else { throw new FormatException("VisaTotal is not a valid double"); }
+            }
         }
     }
 
