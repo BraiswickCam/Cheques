@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.IO;
 
 namespace Cheques
 {
@@ -97,6 +98,45 @@ namespace Cheques
 
             try { this.VisaTotal = Convert.ToDouble(values[19]); }
             catch (System.FormatException) { throw new FormatException("VisaTotal is not a valid double"); }
+        }
+    }
+
+    public class BankListReader
+    {
+        private string source = "C:\\chequeTest\\BANKLIST.txt";
+        private BankList[] results;
+
+        public string Source { get { return source; } private set { source = value; } }
+        public BankList[] Results { get { return results; } private set { results = value; } }
+
+        public BankListReader()
+        {
+            this.Results = ReadResults(this.Source);
+        }
+
+        public BankListReader(string bankListSource)
+        {
+            this.Source = bankListSource;
+            this.Results = ReadResults(this.Source);
+        }
+
+        private BankList[] ReadResults(string listSource)
+        {
+            string read;
+            List<BankList> bl = new List<BankList>();
+            StreamReader sr = new StreamReader(listSource);
+            while ((read = sr.ReadLine()) != null)
+            {
+                string[] values = read.Split(',');
+                for (int i = 0; i < values.Length; i++)
+                {
+                    values[i] = values[i].Substring(1, values[i].Length - 2);
+                }
+                bl.Add(new BankList(values));
+            }
+            sr.Dispose();
+            sr.Close();
+            return bl.ToArray();
         }
     }
 }
