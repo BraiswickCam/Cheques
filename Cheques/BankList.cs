@@ -220,5 +220,46 @@ namespace Cheques
 
             return dt;
         }
+
+        public DataTable CashListTable()
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Demonmination", typeof(string));
+            dt.Columns.Add("Amount", typeof(double));
+
+            double note50Total = 0, note20Total = 0, note10Total = 0, note5Total = 0, coin2Total = 0, coin1Total = 0, coin50Total = 0, coin20Total = 0, coin10Total = 0, coin5Total = 0, coinBronzeTotal = 0, chequeTotal = 0, grandTotal = 0;
+            foreach (BankList bl in this.Results)
+            {
+                note50Total += bl.Notes50;
+                note20Total += bl.Notes20;
+                note10Total += bl.Notes10;
+                note5Total += bl.Notes5;
+                coin2Total += bl.Coins2;
+                coin1Total += bl.Coins1;
+                coin50Total += bl.Coins50;
+                coin20Total += bl.Coins20;
+                coin10Total += bl.Coins10;
+                coin5Total += bl.Coins5;
+                coinBronzeTotal += bl.CoinsBronze;
+                chequeTotal += bl.ChequeTotal;
+                grandTotal += bl.CashChequeTotal;
+            }
+
+            dt.Rows.Add(new object[] { "£50", note50Total });
+            dt.Rows.Add(new object[] { "£20", note20Total });
+            dt.Rows.Add(new object[] { "£10", note10Total });
+            dt.Rows.Add(new object[] { "£5", note5Total });
+            dt.Rows.Add(new object[] { "£2", coin2Total });
+            dt.Rows.Add(new object[] { "£1", coin1Total });
+            dt.Rows.Add(new object[] { "50p", coin50Total });
+            dt.Rows.Add(new object[] { "20p", coin20Total });
+            dt.Rows.Add(new object[] { "10p", coin10Total });
+            dt.Rows.Add(new object[] { "5p", coin5Total });
+            dt.Rows.Add(new object[] { "Bronze", coinBronzeTotal });
+            dt.Rows.Add(new object[] { "Cheques", chequeTotal });
+            dt.Rows.Add(new object[] { "TOTAL", grandTotal });
+
+            return dt;
+        }
     }
 }

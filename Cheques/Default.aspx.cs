@@ -42,6 +42,9 @@ namespace Cheques
 
             schoolList.DataSource = blr.SchoolListTable();
             schoolList.DataBind();
+
+            cashList.DataSource = blr.CashListTable();
+            cashList.DataBind();
         }
     }
 }
