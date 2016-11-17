@@ -172,20 +172,20 @@ namespace Cheques
 
         public BankListReader()
         {
-            this.Results = ReadResults(this.Source);
+            this.Results = ReadResults();
         }
 
         public BankListReader(string bankListSource)
         {
             this.Source = bankListSource;
-            this.Results = ReadResults(this.Source);
+            this.Results = ReadResults();
         }
 
-        private BankList[] ReadResults(string listSource)
+        private BankList[] ReadResults()
         {
             string read;
             List<BankList> bl = new List<BankList>();
-            StreamReader sr = new StreamReader(listSource);
+            StreamReader sr = new StreamReader(this.Source);
             while ((read = sr.ReadLine()) != null)
             {
                 string[] values = read.Split(',');
