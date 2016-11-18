@@ -97,9 +97,9 @@ namespace Cheques
             return sorted;
         }
 
-        public DataTable[] ChequeBatch(BankCheque[] input)
+        public ChqBatch[] ChequeBatch(BankCheque[] input)
         {
-            List<DataTable> dtList = new List<DataTable>();
+            List<ChqBatch> dtList = new List<ChqBatch>();
             List<Chq> cList = new List<Chq>();
             foreach (BankCheque bl in input)
             {
@@ -116,6 +116,7 @@ namespace Cheques
             
             foreach (List<Chq> lc in batchSplit)
             {
+                double totalValue = 0;
                 DataTable dt = new DataTable();
                 dt.Columns.Add("Value", typeof(double));
                 dt.Columns.Add("Number", typeof(double));
@@ -147,8 +148,10 @@ namespace Cheques
                         holder[0] = lc[i].Value;
                         holder[1] = 1;
                     }
+                    totalValue += lc[i].Value;
                 }
-                dtList.Add(dt);
+                
+                dtList.Add(new ChqBatch(dt, totalValue, lc.Count));
             }
             return dtList.ToArray();
         }
@@ -175,6 +178,24 @@ namespace Cheques
                 .GroupBy(x => x.Index / chunkSize)
                 .Select(x => x.Select(v => v.Value).ToList())
                 .ToList();
+        }
+    }
+
+    public class ChqBatch
+    {
+        private DataTable _table;
+        private double _totalValue;
+        private double _totalAmount;
+
+        public DataTable Table { get { return _table; } private set { _table = value; } }
+        public double TotalValue { get { return _totalValue; } private set { _totalValue = value; } }
+        public double TotalAmount { get { return _totalAmount; } private set { _totalAmount = value; } }
+
+        public ChqBatch(DataTable dt, double totalValue, double totalAmount)
+        {
+            this.Table = dt;
+            this.TotalValue = totalValue;
+            this.TotalAmount = totalAmount;
         }
     }
 }
