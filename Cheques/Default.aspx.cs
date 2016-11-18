@@ -18,13 +18,19 @@ namespace Cheques
             BankListReader blr = new BankListReader();
 
             schoolList.DataSource = blr.SchoolListTable();
+            schoolList.RowDataBound += SchoolList_RowDataBound;
             schoolList.DataBind();
+            BoldRow(schoolList, schoolList.Rows.Count - 1);            
 
             cashList.DataSource = blr.CashListTable();
+            cashList.RowDataBound += CashList_RowDataBound;
             cashList.DataBind();
+            BoldRow(cashList, cashList.Rows.Count - 1);
 
             visaList.DataSource = blr.VisaListTable();
+            visaList.RowDataBound += VisaList_RowDataBound;
             visaList.DataBind();
+            BoldRow(visaList, visaList.Rows.Count - 1);
 
             BankChequeReader bcr = new BankChequeReader();
 
@@ -92,6 +98,38 @@ namespace Cheques
             gv.FooterRow.Cells[1].Text = String.Format("<strong>{0}</strong>", _sumCount);
             gv.FooterRow.Cells[2].Text = String.Format("<strong>{0}</strong>", _sumTotal.ToString("C2"));
             col.Controls.Add(gv);
+        }
+
+        private void BoldRow(GridView gv, int rowIndex)
+        {
+            foreach (DataControlFieldCell fc in gv.Rows[rowIndex].Cells)
+            {
+                fc.Text = String.Format("<strong>{0}</strong>", fc.Text);
+            }
+        }
+
+        private void SchoolList_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if(e.Row.RowType == DataControlRowType.DataRow)
+            {
+                e.Row.Cells[3].Text = Convert.ToDouble(e.Row.Cells[3].Text).ToString("C2");
+            }
+        }
+
+        private void CashList_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                e.Row.Cells[1].Text = Convert.ToDouble(e.Row.Cells[1].Text).ToString("C2");
+            }
+        }
+
+        private void VisaList_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                e.Row.Cells[2].Text = Convert.ToDouble(e.Row.Cells[2].Text).ToString("C2");
+            }
         }
 
         private void Gv_RowDataBound(object sender, GridViewRowEventArgs e)
