@@ -15,32 +15,6 @@ namespace Cheques
         protected void Page_Load(object sender, EventArgs e)
         {
             BankListReader blr = new BankListReader();
-            BankList[] records = blr.Results;
-            foreach (BankList bl in records)
-            {
-                testP.InnerHtml += String.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}, {12}, {13}, {14}, {15}, {16}, {17}, {18}, {19}<br>",
-                    bl.JobNo,
-                    bl.Booking,
-                    bl.Collection,
-                    bl.School,
-                    bl.PackType,
-                    bl.CashChequeTotal,
-                    bl.Discount,
-                    bl.Notes50,
-                    bl.Notes20,
-                    bl.Notes10,
-                    bl.Notes5,
-                    bl.Coins2,
-                    bl.Coins1,
-                    bl.Coins50,
-                    bl.Coins20,
-                    bl.Coins10,
-                    bl.Coins5,
-                    bl.Coins2,
-                    bl.CoinsBronze,
-                    bl.ChequeTotal,
-                    bl.VisaTotal);
-            }
 
             schoolList.DataSource = blr.SchoolListTable();
             schoolList.DataBind();
@@ -70,13 +44,23 @@ namespace Cheques
                 gv.ShowFooter = true;
                 gv.CssClass = "table table-striped";
                 gv.DataSource = dt;
+                gv.RowDataBound += Gv_RowDataBound;
                 gv.DataBind();
-                gv.FooterRow.Cells[0].Text = "TOTAL";
-                gv.FooterRow.Cells[1].Text = cb.TotalAmount.ToString();
-                gv.FooterRow.Cells[2].Text = cb.TotalValue.ToString();
+                gv.FooterRow.Cells[0].Text = "<strong>TOTAL</strong>";
+                gv.FooterRow.Cells[1].Text = String.Format("<strong>{0}</strong>", cb.TotalAmount);
+                gv.FooterRow.Cells[2].Text = String.Format("<strong>{0}</strong>", cb.TotalValue.ToString("C2"));
                 col.Controls.Add(gv);
 
                 count++;
+            }
+        }
+
+        private void Gv_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if(e.Row.RowType == DataControlRowType.DataRow)
+            {
+                e.Row.Cells[0].Text = Convert.ToDouble(e.Row.Cells[0].Text).ToString("C2");
+                e.Row.Cells[2].Text = Convert.ToDouble(e.Row.Cells[2].Text).ToString("C2");
             }
         }
     }
