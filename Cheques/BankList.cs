@@ -261,5 +261,22 @@ namespace Cheques
 
             return dt;
         }
+
+        public DataTable VisaListTable()
+        {
+            double grandTotal = 0;
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Job No", typeof(string));
+            dt.Columns.Add("Name of School", typeof(string));
+            dt.Columns.Add("VISA", typeof(double));
+            foreach (BankList bl in this.Results)
+            {
+                dt.Rows.Add(bl.JobNo, bl.School, bl.VisaTotal);
+                grandTotal += bl.VisaTotal;
+            }
+            dt.Rows.Add("", "TOTAL", grandTotal);
+
+            return dt;
+        }
     }
 }

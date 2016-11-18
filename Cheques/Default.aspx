@@ -39,6 +39,18 @@
     <div class="container container-fluid" id="batchTables" runat="server">
 
     </div>
+        <div class="container container-fluid">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2>VISA LIST</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <asp:GridView ID="visaList" runat="server" CssClass="table table-striped table-condensed" GridLines="None"></asp:GridView>
+                </div>
+            </div>
+        </div>
     </form>
 </body>
 </html>

@@ -22,6 +22,9 @@ namespace Cheques
             cashList.DataSource = blr.CashListTable();
             cashList.DataBind();
 
+            visaList.DataSource = blr.VisaListTable();
+            visaList.DataBind();
+
             BankChequeReader bcr = new BankChequeReader();
 
             ChqBatch[] cba = bcr.ChequeBatch(bcr.Results);
