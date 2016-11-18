@@ -130,10 +130,12 @@ namespace Cheques
                             dt.Rows.Add(holder[0], holder[1], holder[0] * holder[1]);
                             holder[0] = lc[i].Value;
                             holder[1] = 1;
+                            if (i == lc.Count - 1) { dt.Rows.Add(holder[0], holder[1], holder[0] * holder[1]); }
                         }
                         else if (i == lc.Count - 1)
                         {
-                            dt.Rows.Add(holder[0], holder[1] + 1, holder[0] * holder[1]);
+                            holder[1]++;
+                            dt.Rows.Add(holder[0], holder[1], holder[0] * holder[1]);
                         }
                         else
                         {

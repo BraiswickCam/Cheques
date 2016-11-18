@@ -49,7 +49,7 @@ namespace Cheques
             BankChequeReader bcr = new BankChequeReader();
 
             DataTable[] dta = bcr.ChequeBatch(bcr.Results);
-            DataTable[] view = dta;
+
         }
     }
 }
