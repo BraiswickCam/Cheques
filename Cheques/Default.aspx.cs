@@ -45,6 +45,11 @@ namespace Cheques
 
             cashList.DataSource = blr.CashListTable();
             cashList.DataBind();
+
+            BankChequeReader bcr = new BankChequeReader();
+
+            DataTable[] dta = bcr.ChequeBatch(bcr.Results);
+            DataTable[] view = dta;
         }
     }
 }

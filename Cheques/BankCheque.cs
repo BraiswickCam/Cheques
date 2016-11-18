@@ -52,7 +52,7 @@ namespace Cheques
 
     public class BankChequeReader
     {
-        private string source = "C:\\chequeTest\\BANKLIST.txt";
+        private string source = "C:\\chequeTest\\BANKCHQ.txt";
         private BankCheque[] results;
 
         public string Source { get { return source; } private set { source = value; } }
@@ -61,12 +61,14 @@ namespace Cheques
         public BankChequeReader()
         {
             this.Results = ReadResults();
+            this.Results = SortArray();
         }
 
         public BankChequeReader(string chqListSource)
         {
             this.Source = chqListSource;
             this.Results = ReadResults();
+            this.Results = SortArray();
         }
 
         private BankCheque[] ReadResults()
@@ -88,13 +90,89 @@ namespace Cheques
             return bc.ToArray();
         }
 
-        //NEEDS TESTING!!
-        //
-        //private BankCheque[] SortArray()
-        //{
-        //    BankCheque[] sorted = this.Results;
-        //    Array.Sort(sorted, delegate (BankCheque x, BankCheque y) { return x.Value.CompareTo(y.Value); });
-        //    return sorted;
-        //}
+        private BankCheque[] SortArray()
+        {
+            BankCheque[] sorted = this.Results;
+            Array.Sort(sorted, delegate (BankCheque x, BankCheque y) { return x.Value.CompareTo(y.Value); });
+            return sorted;
+        }
+
+        public DataTable[] ChequeBatch(BankCheque[] input)
+        {
+            List<DataTable> dtList = new List<DataTable>();
+            List<Chq> cList = new List<Chq>();
+            foreach (BankCheque bl in input)
+            {
+                for (int i = 0; i < bl.Amount; i++)
+                {
+                    if (bl.Value != 0)
+                    {
+                        Chq c = new Chq(bl);
+                        cList.Add(c);
+                    }
+                }
+            }
+            List<List<Chq>> batchSplit = ListExtensions.ChunkBy<Chq>(cList, 149);
+            
+            foreach (List<Chq> lc in batchSplit)
+            {
+                DataTable dt = new DataTable();
+                dt.Columns.Add("Value", typeof(double));
+                dt.Columns.Add("Number", typeof(double));
+                dt.Columns.Add("Total", typeof(double));
+                double[] holder = new double[2];
+                for (int i = 0; i < lc.Count; i++)
+                {
+                    if (i != 0)
+                    {
+                        if (holder[0] != lc[i].Value)
+                        {
+                            dt.Rows.Add(holder[0], holder[1], holder[0] * holder[1]);
+                            holder[0] = lc[i].Value;
+                            holder[1] = 1;
+                        }
+                        else if (i == lc.Count - 1)
+                        {
+                            dt.Rows.Add(holder[0], holder[1] + 1, holder[0] * holder[1]);
+                        }
+                        else
+                        {
+                            holder[1]++;
+                        }
+                    }
+                    else
+                    {
+                        holder[0] = lc[i].Value;
+                        holder[1] = 1;
+                    }
+                }
+                dtList.Add(dt);
+            }
+            return dtList.ToArray();
+        }
+    }
+
+    public class Chq
+    {
+        private double _value;
+        
+        public double Value { get { return _value; } set { _value = value; } }
+
+        public Chq(BankCheque input)
+        {
+            this.Value = input.Value;
+        }
+    }
+
+    public static class ListExtensions
+    {
+        public static List<List<T>> ChunkBy<T>(this List<T> source, int chunkSize)
+        {
+            return source
+                .Select((x, i) => new { Index = i, Value = x })
+                .GroupBy(x => x.Index / chunkSize)
+                .Select(x => x.Select(v => v.Value).ToList())
+                .ToList();
+        }
     }
 }
