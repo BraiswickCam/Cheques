@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.UI.HtmlControls;
 using System.Data;
 
 namespace Cheques
@@ -49,7 +50,28 @@ namespace Cheques
             BankChequeReader bcr = new BankChequeReader();
 
             DataTable[] dta = bcr.ChequeBatch(bcr.Results);
+            int count = 1;
+            foreach (DataTable dt in dta)
+            {
+                HtmlGenericControl row = new HtmlGenericControl("div");
+                row.Attributes["class"] = "row";
+                batchTables.Controls.Add(row);
 
+                HtmlGenericControl col = new HtmlGenericControl("div");
+                col.Attributes["class"] = "col-xs-12";
+                row.Controls.Add(col);
+
+                col.Controls.Add(new LiteralControl(String.Format("<h2>CHEQUE LIST Batch No. {0}</h2>", count)));
+
+                GridView gv = new GridView();
+                gv.GridLines = GridLines.None;
+                gv.CssClass = "table table-striped";
+                gv.DataSource = dt;
+                gv.DataBind();
+                col.Controls.Add(gv);
+
+                count++;
+            }
         }
     }
 }

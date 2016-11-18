@@ -31,6 +31,9 @@
             </div>
         </div>
     </div>
+        <div class="container container-fluid" id="batchTables" runat="server">
+
+        </div>
     </form>
 </body>
 </html>
