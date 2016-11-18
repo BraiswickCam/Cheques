@@ -224,7 +224,7 @@ namespace Cheques
         public DataTable CashListTable()
         {
             DataTable dt = new DataTable();
-            dt.Columns.Add("Demonmination", typeof(string));
+            dt.Columns.Add("Denonmination", typeof(string));
             dt.Columns.Add("Amount", typeof(double));
 
             double note50Total = 0, note20Total = 0, note10Total = 0, note5Total = 0, coin2Total = 0, coin1Total = 0, coin50Total = 0, coin20Total = 0, coin10Total = 0, coin5Total = 0, coinBronzeTotal = 0, chequeTotal = 0, grandTotal = 0;

@@ -16,25 +16,29 @@
 
     <div class="container container-fluid">
         <div class="row">
-            <div class="col-xs-6 col-lg-6">
+            <div class="col-xs-12 col-lg-12">
                 <h2>School List</h2>
             </div>
-            <div class="col-xs-6 col-lg-6">
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-lg-12">
+                <asp:GridView ID="schoolList" runat="server" CssClass="table table-striped table-condensed" GridLines="None"></asp:GridView>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-lg-12">
                 <h2>Cash List</h2>
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-6 col-lg-6">
-                <asp:GridView ID="schoolList" runat="server" CssClass="table table-striped" GridLines="None"></asp:GridView>
-            </div>
-            <div class="col-xs-6 col-lg-6">
-                <asp:GridView ID="cashList" runat="server" CssClass="table table-striped" GridLines="None"></asp:GridView>
+            <div class="col-xs-12 col-lg-12">
+                <asp:GridView ID="cashList" runat="server" CssClass="table table-striped table-condensed" GridLines="None"></asp:GridView>
             </div>
         </div>
     </div>
-        <div class="container container-fluid" id="batchTables" runat="server">
+    <div class="container container-fluid" id="batchTables" runat="server">
 
-        </div>
+    </div>
     </form>
 </body>
 </html>

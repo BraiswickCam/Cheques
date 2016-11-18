@@ -48,7 +48,7 @@ namespace Cheques
                 GridView gv = new GridView();
                 gv.GridLines = GridLines.None;
                 gv.ShowFooter = true;
-                gv.CssClass = "table table-striped";
+                gv.CssClass = "table table-striped table-condensed";
                 gv.DataSource = dt;
                 gv.RowDataBound += Gv_RowDataBound;
                 gv.DataBind();
@@ -81,7 +81,7 @@ namespace Cheques
             GridView gv = new GridView();
             gv.GridLines = GridLines.None;
             gv.ShowFooter = true;
-            gv.CssClass = "table table-striped";
+            gv.CssClass = "table table-striped table-condensed";
             gv.DataSource = _sumTable;
             gv.DataBind();
             gv.FooterRow.Cells[0].Text = "<strong>TOTAL</strong>";
