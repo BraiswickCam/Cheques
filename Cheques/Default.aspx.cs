@@ -11,6 +11,7 @@ namespace Cheques
 {
     public partial class Default : System.Web.UI.Page
     {
+        double totalHolder = 0, amountHolder = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             BankListReader blr = new BankListReader();
@@ -65,12 +66,31 @@ namespace Cheques
 
                 GridView gv = new GridView();
                 gv.GridLines = GridLines.None;
+                gv.ShowFooter = true;
                 gv.CssClass = "table table-striped";
                 gv.DataSource = dt;
+                gv.RowDataBound += Gv_RowDataBound;
                 gv.DataBind();
                 col.Controls.Add(gv);
 
                 count++;
+            }
+        }
+
+        private void Gv_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if(e.Row.RowType == DataControlRowType.Footer)
+            {
+                e.Row.Cells[0].Text = "<strong>TOTAL</strong>";
+                e.Row.Cells[1].Text = String.Format("<strong>{0}</strong>", amountHolder);
+                e.Row.Cells[2].Text = String.Format("<strong>{0}</strong>", totalHolder);
+                amountHolder = 0;
+                totalHolder = 0;
+            }
+            else if(e.Row.RowType == DataControlRowType.DataRow)
+            {
+                amountHolder += Convert.ToDouble(e.Row.Cells[1].Text);
+                totalHolder += Convert.ToDouble(e.Row.Cells[2].Text);
             }
         }
     }
