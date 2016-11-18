@@ -16,6 +16,11 @@
 
     <div class="container container-fluid">
         <div class="row">
+            <div class="col-xs-12">
+                <h1 id="topTitle" runat="server">Banking Summary</h1>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-xs-12 col-lg-12">
                 <h2>School List</h2>
             </div>

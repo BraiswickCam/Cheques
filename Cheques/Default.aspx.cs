@@ -14,6 +14,7 @@ namespace Cheques
         double totalHolder = 0, amountHolder = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
+            topTitle.InnerHtml = String.Format("Banking Summary - <strong>{0}</strong>", DateTime.Now.ToShortDateString());
             BankListReader blr = new BankListReader();
 
             schoolList.DataSource = blr.SchoolListTable();
