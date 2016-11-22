@@ -58,6 +58,7 @@ namespace Cheques
 
         public string Source { get { return source; } private set { source = value; } }
         public BankCheque[] Results { get { return results; } private set { results = value;} }
+        public int SplitSize { get { return Convert.ToInt32(ConfigurationManager.AppSettings["batchSize"]); } }
 
         public BankChequeReader()
         {
@@ -113,7 +114,7 @@ namespace Cheques
                     }
                 }
             }
-            List<List<Chq>> batchSplit = ListExtensions.ChunkBy<Chq>(cList, 149);
+            List<List<Chq>> batchSplit = ListExtensions.ChunkBy<Chq>(cList, this.SplitSize);
             
             foreach (List<Chq> lc in batchSplit)
             {
