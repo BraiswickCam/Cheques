@@ -40,6 +40,24 @@ namespace Cheques {
         protected global::System.Web.UI.WebControls.TextBox bankchqPathText;
         
         /// <summary>
+        /// backupPathText control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox backupPathText;
+        
+        /// <summary>
+        /// batchSplitText control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox batchSplitText;
+        
+        /// <summary>
         /// saveSettings control.
         /// </summary>
         /// <remarks>

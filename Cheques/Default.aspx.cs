@@ -16,6 +16,8 @@ namespace Cheques
             {
                 banklistPathText.Text = ConfigurationManager.AppSettings["bankListPath"];
                 bankchqPathText.Text = ConfigurationManager.AppSettings["bankChqListPath"];
+                backupPathText.Text = ConfigurationManager.AppSettings["backupPath"];
+                batchSplitText.Text = ConfigurationManager.AppSettings["batchSize"];
             }
         }
 
@@ -23,6 +25,8 @@ namespace Cheques
         {
             ConfigurationManager.AppSettings["bankListPath"] = banklistPathText.Text;
             ConfigurationManager.AppSettings["bankChqListPath"] = bankchqPathText.Text;
+            ConfigurationManager.AppSettings["backupPath"] = backupPathText.Text;
+            ConfigurationManager.AppSettings["batchSize"] = batchSplitText.Text;
         }
     }
 }

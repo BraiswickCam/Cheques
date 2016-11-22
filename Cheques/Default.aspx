@@ -43,6 +43,14 @@
                     <div class="col-md-4">BANKCHQ.TXT path</div>
                     <div class="col-md-8"><asp:TextBox ID="bankchqPathText" runat="server" CssClass="form-control"></asp:TextBox></div>
                 </div>
+                <div class="row top15">
+                    <div class="col-md-4">Back up path</div>
+                    <div class="col-md-8"><asp:TextBox ID="backupPathText" runat="server" CssClass="form-control"></asp:TextBox></div>
+                </div>
+                <div class="row top15">
+                    <div class="col-md-4">Batch split size</div>
+                    <div class="col-md-8"><asp:TextBox ID="batchSplitText" runat="server" CssClass="form-control"></asp:TextBox></div>
+                </div>
                 <div class="row top15 text-center">
                     <asp:Button ID="saveSettings" runat="server" CssClass="btn btn-primary" Text="Save Settings" OnClick="saveSettings_Click" />
                 </div>
