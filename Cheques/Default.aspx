@@ -44,7 +44,7 @@
                     <div class="col-md-8"><asp:TextBox ID="bankchqPathText" runat="server" CssClass="form-control"></asp:TextBox></div>
                 </div>
                 <div class="row top15 text-center">
-                    <asp:Button ID="saveSettings" runat="server" CssClass="btn btn-primary" Text="Save Settings" />
+                    <asp:Button ID="saveSettings" runat="server" CssClass="btn btn-primary" Text="Save Settings" OnClick="saveSettings_Click" />
                 </div>
             </div>
         </div>
