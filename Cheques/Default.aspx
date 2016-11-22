@@ -34,22 +34,22 @@
                     <button type="button" id="adminSettings" class="btn btn-danger"><span class="glyphicon glyphicon-cog"></span> Admin Settings</button> <p>Change banking summary config.</p></br>
                 </div>
             </div>
-            <div class="col-md-offset-3 col-md-6 form-group" id="settingsDiv">
-                <div class="row">
-                    <div class="col-md-4">BANKLIST.TXT path</div>
-                    <div class="col-md-8"><asp:TextBox ID="banklistPathText" runat="server" CssClass="form-control"></asp:TextBox></div>
+            <div class="col-md-offset-4 col-md-4" id="settingsDiv">
+                <div class="form-group">
+                    <label for="<%=banklistPathText.ClientID %>">BANKLIST.TXT path</label>
+                    <asp:TextBox ID="banklistPathText" runat="server" CssClass="form-control"></asp:TextBox>
                 </div>
-                <div class="row top15">
-                    <div class="col-md-4">BANKCHQ.TXT path</div>
-                    <div class="col-md-8"><asp:TextBox ID="bankchqPathText" runat="server" CssClass="form-control"></asp:TextBox></div>
+                <div class="form-group">
+                    <label for="<%=bankchqPathText.ClientID %>">BANKCHQ.TXT path</label>
+                    <asp:TextBox ID="bankchqPathText" runat="server" CssClass="form-control"></asp:TextBox>
                 </div>
-                <div class="row top15">
-                    <div class="col-md-4">Back up path</div>
-                    <div class="col-md-8"><asp:TextBox ID="backupPathText" runat="server" CssClass="form-control"></asp:TextBox></div>
+                <div class="form-group">
+                    <label for="<%=backupPathText.ClientID %>">Back up path</label>
+                    <asp:TextBox ID="backupPathText" runat="server" CssClass="form-control"></asp:TextBox>
                 </div>
-                <div class="row top15">
-                    <div class="col-md-4">Batch split size</div>
-                    <div class="col-md-8"><asp:TextBox ID="batchSplitText" runat="server" CssClass="form-control numeric-only"></asp:TextBox></div>
+                <div class="form-group">
+                    <label for="<%=batchSplitText.ClientID %>">Batch split size</label>
+                    <asp:TextBox ID="batchSplitText" runat="server" CssClass="form-control numeric-only"></asp:TextBox>
                 </div>
                 <div class="row top15 text-center">
                     <asp:Button ID="saveSettings" runat="server" CssClass="btn btn-primary savebutton" Text="Save Settings" OnClick="saveSettings_Click" />
