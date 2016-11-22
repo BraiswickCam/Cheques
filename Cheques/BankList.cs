@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.IO;
 using System.Data;
+using System.Configuration;
 
 namespace Cheques
 {
@@ -164,7 +165,7 @@ namespace Cheques
 
     public class BankListReader
     {
-        private string source = "C:\\chequeTest\\BANKLIST.txt";
+        private string source = ConfigurationManager.AppSettings["bankListPath"];
         private BankList[] results;
 
         public string Source { get { return source; } private set { source = value; } }

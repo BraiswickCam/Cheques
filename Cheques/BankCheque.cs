@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.IO;
 using System.Data;
+using System.Configuration;
 
 namespace Cheques
 {
@@ -52,7 +53,7 @@ namespace Cheques
 
     public class BankChequeReader
     {
-        private string source = "C:\\chequeTest\\BANKCHQ.txt";
+        private string source = ConfigurationManager.AppSettings["bankChqListPath"];
         private BankCheque[] results;
 
         public string Source { get { return source; } private set { source = value; } }
