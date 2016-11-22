@@ -10,7 +10,7 @@
 namespace Cheques {
     
     
-    public partial class Default {
+    public partial class Report {
         
         /// <summary>
         /// form1 control.

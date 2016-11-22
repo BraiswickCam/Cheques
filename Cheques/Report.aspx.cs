@@ -9,7 +9,7 @@ using System.Data;
 
 namespace Cheques
 {
-    public partial class Default : System.Web.UI.Page
+    public partial class Report : System.Web.UI.Page
     {
         double totalHolder = 0, amountHolder = 0;
         protected void Page_Load(object sender, EventArgs e)
