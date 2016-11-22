@@ -35,17 +35,20 @@
                 </div>
             </div>
             <div class="col-md-offset-4 col-md-4" id="settingsDiv">
-                <div class="form-group">
-                    <label for="<%=banklistPathText.ClientID %>">BANKLIST.TXT path</label>
+                <div class="form-group has-feedback" id="path1In">
+                    <label for="<%=banklistPathText.ClientID %>" class="control-label">BANKLIST.TXT path</label>
                     <asp:TextBox ID="banklistPathText" runat="server" CssClass="form-control"></asp:TextBox>
+                    <span id="path1Icon" class="glyphicon form-control-feedback"></span>
                 </div>
-                <div class="form-group">
-                    <label for="<%=bankchqPathText.ClientID %>">BANKCHQ.TXT path</label>
+                <div class="form-group has-feedback" id="path2In">
+                    <label for="<%=bankchqPathText.ClientID %>" class="control-label">BANKCHQ.TXT path</label>
                     <asp:TextBox ID="bankchqPathText" runat="server" CssClass="form-control"></asp:TextBox>
+                    <span id="path2Icon" class="glyphicon form-control-feedback"></span>
                 </div>
-                <div class="form-group">
-                    <label for="<%=backupPathText.ClientID %>">Back up path</label>
+                <div class="form-group has-feedback" id="path3In">
+                    <label for="<%=backupPathText.ClientID %>" class="control-label">Back up path</label>
                     <asp:TextBox ID="backupPathText" runat="server" CssClass="form-control"></asp:TextBox>
+                    <span id="path3Icon" class="glyphicon form-control-feedback"></span>
                 </div>
                 <div class="form-group">
                     <label for="<%=batchSplitText.ClientID %>">Batch split size</label>
@@ -78,13 +81,28 @@
     </form>
     <script>
         $(document).ready(function () {
+            var path1 = <%=path1.ToString().ToLower()%>;
+            var path2 = <%=path2.ToString().ToLower()%>;
+            var path3 = <%=path3.ToString().ToLower()%>;
+
+            checkFile(path1, "path1");
+            checkFile(path2, "path2");
+            checkFile(path3, "path3");
+
             $("#settingsDiv").slideUp(0);
+
+            if (path1 == false || path2 == false || path3 == false){
+                $("#settingsDiv").slideDown(400);
+            }
+
             $("#adminSettings").click(function () {
                 $("#settingsDiv").slideToggle(800);
             });
+
             $(".savebutton").click(function () {
                 $("#settingsDiv").slideUp(100);
             });
+
             $(document).on('keyup', '.numeric-only', function (event) {
                 var v = this.value;
                 if ($.isNumeric(v) === false) {
@@ -92,6 +110,16 @@
                 }
             });
         });
+
+        function checkFile(csharpBool, idStart){
+            if(csharpBool == true){
+                $("#" + idStart + "In").addClass("has-success");
+                $("#" + idStart + "Icon").addClass("glyphicon-ok");
+            } else {
+                $("#" + idStart + "In").addClass("has-error");
+                $("#" + idStart + "Icon").addClass("glyphicon-remove");
+            }
+        };
     </script>
 </body>
 </html>

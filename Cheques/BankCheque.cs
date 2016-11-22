@@ -48,6 +48,12 @@ namespace Cheques
 
             try { this.TotalValue = Convert.ToDouble(values[6]); }
             catch (System.FormatException) { throw new FormatException("TotalValue is not a valid double"); }
+
+            double checkValue = this.Amount * this.Value;
+            if (Math.Round(checkValue, 2) != this.TotalValue)
+            {
+                throw new FormatException("Cheque total does not add up!");
+            }
         }
     }
 

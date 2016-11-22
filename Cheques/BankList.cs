@@ -160,6 +160,13 @@ namespace Cheques
                 if (values[19] == string.Empty) { this.VisaTotal = 0; }
                 else { throw new FormatException("VisaTotal is not a valid double"); }
             }
+
+            double totalCheck = this.Notes50 + this.Notes20 + this.Notes10 + this.Notes5 + this.Coins2 + this.Coins1 + this.Coins50 + this.Coins20 + this.Coins10 + this.Coins5 + this.CoinsBronze + this.ChequeTotal;
+            if (System.Math.Round(totalCheck, 2) != this.CashChequeTotal)
+            {
+                //NEED CUSTOM EXCEPTION HERE!
+                throw new FormatException("Totals do not add up!");
+            }
         }
     }
 
