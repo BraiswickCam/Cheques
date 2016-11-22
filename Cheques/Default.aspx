@@ -49,10 +49,10 @@
                 </div>
                 <div class="row top15">
                     <div class="col-md-4">Batch split size</div>
-                    <div class="col-md-8"><asp:TextBox ID="batchSplitText" runat="server" CssClass="form-control"></asp:TextBox></div>
+                    <div class="col-md-8"><asp:TextBox ID="batchSplitText" runat="server" CssClass="form-control numeric-only"></asp:TextBox></div>
                 </div>
                 <div class="row top15 text-center">
-                    <asp:Button ID="saveSettings" runat="server" CssClass="btn btn-primary" Text="Save Settings" OnClick="saveSettings_Click" />
+                    <asp:Button ID="saveSettings" runat="server" CssClass="btn btn-primary savebutton" Text="Save Settings" OnClick="saveSettings_Click" />
                 </div>
             </div>
         </div>
@@ -65,12 +65,12 @@
                         <h4 class="modal-title"><span class="glyphicon glyphicon-check"></span> Finalize Day</h4>
                     </div>
                     <div class="modal-body">
-                        <p><span class="glyphicon glyphicon-alert"></span> <strong>Have you finished banking for the day and printed a summary?</strong></p>
+                        <h4><span class="glyphicon glyphicon-alert"></span> <strong>Have you finished banking for the day and printed a summary?</strong></h4>
                         <p>If not, finish banking and use the "Today's Summary" button to print your summary before finalizing day.</p>
                     </div>
                     <div class="modal-footer">
                         <asp:Button ID="finDayButton" runat="server" CssClass="btn btn-danger" Text="Finalize Day" />
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                     </div>
                 </div>
             </div>
@@ -81,6 +81,15 @@
             $("#settingsDiv").slideUp(0);
             $("#adminSettings").click(function () {
                 $("#settingsDiv").slideToggle(800);
+            });
+            $(".savebutton").click(function () {
+                $("#settingsDiv").slideUp(100);
+            });
+            $(document).on('keyup', '.numeric-only', function (event) {
+                var v = this.value;
+                if ($.isNumeric(v) === false) {
+                    this.value = this.value.slice(0, -1);
+                }
             });
         });
     </script>

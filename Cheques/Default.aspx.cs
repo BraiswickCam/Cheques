@@ -19,6 +19,10 @@ namespace Cheques
                 backupPathText.Text = ConfigurationManager.AppSettings["backupPath"];
                 batchSplitText.Text = ConfigurationManager.AppSettings["batchSize"];
             }
+            else
+            {
+                ClientScript.RegisterClientScriptBlock(GetType(), "IsPostBack", "var isPostBack = true;", true);
+            }
         }
 
         protected void saveSettings_Click(object sender, EventArgs e)
