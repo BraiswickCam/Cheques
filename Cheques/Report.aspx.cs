@@ -6,6 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using System.Data;
+using System.IO;
+using System.Configuration;
 
 namespace Cheques
 {
@@ -14,13 +16,56 @@ namespace Cheques
         double totalHolder = 0, amountHolder = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
+            string error = "";
+            if (FilesCopied(out error)) GenerateTables();
+            else
+            {
+                //error message
+            }
+        }
+
+        private bool FilesCopied(out string errorMsg)
+        {
+            string bankListPath = ConfigurationManager.AppSettings["bankListPath"];
+            string bankChqListPath = ConfigurationManager.AppSettings["bankChqListPath"];
+            if (File.Exists(bankListPath) && File.Exists(bankChqListPath))
+            {
+                string backupDir = String.Format("{0}\\{1}", ConfigurationManager.AppSettings["backupPath"], DateTime.Now.ToString("yyyyddMM_HHmmss"));
+                Directory.CreateDirectory(backupDir);
+                File.Copy(bankListPath, String.Format("{0}\\BANKLIST.TXT", backupDir));
+                File.Copy(bankChqListPath, String.Format("{0}\\BANKCHQ.TXT", backupDir));
+                errorMsg = "";
+                return true;
+            }
+            else
+            {
+                if (!File.Exists(bankListPath) && !File.Exists(bankChqListPath))
+                {
+                    errorMsg = "Both data files are missing!";
+                    return false;
+                }
+                else if (File.Exists(bankChqListPath))
+                {
+                    errorMsg = "The BANKLIST.TXT file is missing!";
+                    return false;
+                }
+                else
+                {
+                    errorMsg = "The BANCHQ.TXT file is missing!";
+                    return false;
+                }
+            }
+        }
+
+        private void GenerateTables()
+        {
             topTitle.InnerHtml = String.Format("Banking Summary - <strong>{0}</strong>", DateTime.Now.ToShortDateString());
             BankListReader blr = new BankListReader();
 
             schoolList.DataSource = blr.SchoolListTable();
             schoolList.RowDataBound += SchoolList_RowDataBound;
             schoolList.DataBind();
-            BoldRow(schoolList, schoolList.Rows.Count - 1);            
+            BoldRow(schoolList, schoolList.Rows.Count - 1);
 
             cashList.DataSource = blr.CashListTable();
             cashList.RowDataBound += CashList_RowDataBound;
