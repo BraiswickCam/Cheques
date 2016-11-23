@@ -162,10 +162,9 @@ namespace Cheques
             }
 
             double totalCheck = this.Notes50 + this.Notes20 + this.Notes10 + this.Notes5 + this.Coins2 + this.Coins1 + this.Coins50 + this.Coins20 + this.Coins10 + this.Coins5 + this.CoinsBronze + this.ChequeTotal;
-            if (System.Math.Round(totalCheck, 2) != this.CashChequeTotal)
+            if (Math.Round(totalCheck, 2) != this.CashChequeTotal)
             {
-                //NEED CUSTOM EXCEPTION HERE!
-                throw new FormatException("Totals do not add up!");
+                throw new BankListException("The total cash and cheque values do not add correctly on this line!", this.JobNo, this.School, this.PackType, this.Collection, this.Booking);
             }
         }
     }
@@ -180,13 +179,15 @@ namespace Cheques
 
         public BankListReader()
         {
-            this.Results = ReadResults();
+            try { this.Results = ReadResults(); }
+            catch (BankListException ex) { throw ex; }
         }
 
         public BankListReader(string bankListSource)
         {
             this.Source = bankListSource;
-            this.Results = ReadResults();
+            try { this.Results = ReadResults(); }
+            catch (BankListException ex) { throw ex; }
         }
 
         private BankList[] ReadResults()
@@ -201,7 +202,13 @@ namespace Cheques
                 {
                     values[i] = values[i].Substring(1, values[i].Length - 2);
                 }
-                bl.Add(new BankList(values));
+                try { bl.Add(new BankList(values)); }
+                catch (BankListException ex)
+                {
+                    sr.Dispose();
+                    sr.Close();
+                    throw ex;
+                }
             }
             sr.Dispose();
             sr.Close();

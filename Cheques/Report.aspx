@@ -10,10 +10,13 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div>
-    <p id="testP" runat="server" class="hidden"></p>
-    </div>
-
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-offset-3 col-md-6">
+                    <div class="alert alert-danger hidden" id="reportAlert" runat="server"></div>
+                </div>
+            </div>
+        </div>
     <div class="container container-fluid">
         <div class="row">
             <div class="col-xs-12">

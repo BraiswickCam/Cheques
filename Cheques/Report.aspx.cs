@@ -57,10 +57,18 @@ namespace Cheques
             }
         }
 
-        private void GenerateTables()
+        private bool GenerateTables()
         {
             topTitle.InnerHtml = String.Format("Banking Summary - <strong>{0}</strong>", DateTime.Now.ToShortDateString());
-            BankListReader blr = new BankListReader();
+            BankListReader blr;
+            try { blr = new BankListReader(); }
+            catch (BankListException ex)
+            {
+                reportAlert.Attributes["class"] = "alert alert-danger";
+                reportAlert.InnerHtml = String.Format("<strong>ERROR!</strong> The totals for cash/cheque on the following line do not add up correctly!<br/>JobNo: {0}<br/>Booking: {1}<br/>Collection: {2}<br/>School: {3}<br/>Pack: {4}",
+                    ex.JobNo, ex.Booking, ex.Collection, ex.School, ex.PackType);
+                return false;
+            }
 
             schoolList.DataSource = blr.SchoolListTable();
             schoolList.RowDataBound += SchoolList_RowDataBound;
@@ -119,6 +127,7 @@ namespace Cheques
                 count++;
             }
             SummaryTable(sumDt, count, sumCount, sumTotal);
+            return true;
         }
 
         private void SummaryTable(DataTable _sumTable, int _count, double _sumCount, double _sumTotal)
