@@ -86,8 +86,15 @@
             var path2 = <%=path2.ToString().ToLower()%>;
             var path3 = <%=path3.ToString().ToLower()%>;
 
+            var path1Val = document.getElementById("<%=banklistPathText.ClientID %>").value;
+            var path2Val = document.getElementById("<%=bankchqPathText.ClientID %>").value;
+            var path3Val = document.getElementById("<%=backupPathText.ClientID %>").value;
+
             var batch1 = document.getElementById("<%=batchSplitText.ClientID %>");
             var batchId = "#" + "<%=batchSplitText.ClientID %>";
+            var path1Id = "#" + "<%=banklistPathText.ClientID %>";
+            var path2Id = "#" + "<%=bankchqPathText.ClientID %>";
+            var path3Id = "#" + "<%=backupPathText.ClientID %>";
 
             checkFile(path1, "path1");
             checkFile(path2, "path2");
@@ -96,7 +103,7 @@
 
             $("#settingsDiv").slideUp(0);
 
-            if (path1 == false || path2 == false || path3 == false){
+            if (path1 == false || path2 == false || path3 == false || $.isNumeric(batch1.value) == false){
                 $("#settingsDiv").slideDown(400);
             }
 
@@ -111,6 +118,18 @@
             $(batchId).keyup(function () {
                 batchNumCheck(batch1);
             });
+
+            $(path1Id).keyup(function () {
+                pathTyping(path1, "path1", path1Val, "<%=banklistPathText.ClientID %>");
+            });
+
+            $(path2Id).keyup(function () {
+                pathTyping(path2, "path2", path2Val, "<%=bankchqPathText.ClientID %>");
+            });
+
+            $(path3Id).keyup(function () {
+                pathTyping(path3, "path3", path3Val, "<%=backupPathText.ClientID %>");
+            });
         });
 
         function checkFile(csharpBool, idStart){
@@ -121,6 +140,19 @@
                 $("#" + idStart + "In").addClass("has-error");
                 $("#" + idStart + "Icon").addClass("glyphicon-remove");
             }
+        };
+
+        function pathTyping(csharpBool, idStart, origVal, eleId){
+            if(csharpBool == true){
+                $("#" + idStart + "In").removeClass("has-success");
+                $("#" + idStart + "Icon").removeClass("glyphicon-ok");
+            } else {
+                $("#" + idStart + "In").removeClass("has-error");
+                $("#" + idStart + "Icon").removeClass("glyphicon-remove");
+            }
+            
+            $("#" + idStart + "In").addClass("has-warning");
+            $("#" + idStart + "Icon").addClass("glyphicon-question-sign");
         };
 
         function batchNumCheck(batchEle){
