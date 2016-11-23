@@ -61,12 +61,22 @@ namespace Cheques
         {
             topTitle.InnerHtml = String.Format("Banking Summary - <strong>{0}</strong>", DateTime.Now.ToShortDateString());
             BankListReader blr;
+            BankChequeReader bcr;
             try { blr = new BankListReader(); }
             catch (BankListException ex)
             {
                 reportAlert.Attributes["class"] = "alert alert-danger";
                 reportAlert.InnerHtml = String.Format("<strong>ERROR!</strong> The totals for cash/cheque on the following line do not add up correctly!<br/>JobNo: {0}<br/>Booking: {1}<br/>Collection: {2}<br/>School: {3}<br/>Pack: {4}",
                     ex.JobNo, ex.Booking, ex.Collection, ex.School, ex.PackType);
+                return false;
+            }
+
+            try { bcr = new BankChequeReader(); }
+            catch (BankChequeException ex)
+            {
+                reportAlert.Attributes["class"] = "alert alert-danger";
+                reportAlert.InnerHtml = String.Format("<strong>ERROR!</strong> The cheques on the following line do not add up correctly!<br/>JobNo: {0}<br/>Booking: {1}<br/>Collection: {2}<br/>Index {3}<br/>",
+                    ex.JobNo, ex.Booking, ex.Collection, ex.Index);
                 return false;
             }
 
@@ -84,8 +94,6 @@ namespace Cheques
             visaList.RowDataBound += VisaList_RowDataBound;
             visaList.DataBind();
             BoldRow(visaList, visaList.Rows.Count - 1);
-
-            BankChequeReader bcr = new BankChequeReader();
 
             ChqBatch[] cba = bcr.ChequeBatch(bcr.Results);
             int count = 1;

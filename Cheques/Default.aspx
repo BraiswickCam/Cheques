@@ -50,9 +50,10 @@
                     <asp:TextBox ID="backupPathText" runat="server" CssClass="form-control"></asp:TextBox>
                     <span id="path3Icon" class="glyphicon form-control-feedback"></span>
                 </div>
-                <div class="form-group">
-                    <label for="<%=batchSplitText.ClientID %>">Batch split size</label>
+                <div class="form-group has-feedback" id="batchIn">
+                    <label for="<%=batchSplitText.ClientID %>" class="control-label">Batch split size</label>
                     <asp:TextBox ID="batchSplitText" runat="server" CssClass="form-control numeric-only"></asp:TextBox>
+                    <span id="batchIcon" class="glyphicon form-control-feedback"></span>
                 </div>
                 <div class="row top15 text-center">
                     <asp:Button ID="saveSettings" runat="server" CssClass="btn btn-primary savebutton" Text="Save Settings" OnClick="saveSettings_Click" />
@@ -85,9 +86,13 @@
             var path2 = <%=path2.ToString().ToLower()%>;
             var path3 = <%=path3.ToString().ToLower()%>;
 
+            var batch1 = document.getElementById("<%=batchSplitText.ClientID %>");
+            var batchId = "#" + "<%=batchSplitText.ClientID %>";
+
             checkFile(path1, "path1");
             checkFile(path2, "path2");
             checkFile(path3, "path3");
+            batchNumCheck(batch1);
 
             $("#settingsDiv").slideUp(0);
 
@@ -103,11 +108,8 @@
                 $("#settingsDiv").slideUp(100);
             });
 
-            $(document).on('keyup', '.numeric-only', function (event) {
-                var v = this.value;
-                if ($.isNumeric(v) === false) {
-                    this.value = this.value.slice(0, -1);
-                }
+            $(batchId).keyup(function () {
+                batchNumCheck(batch1);
             });
         });
 
@@ -118,6 +120,21 @@
             } else {
                 $("#" + idStart + "In").addClass("has-error");
                 $("#" + idStart + "Icon").addClass("glyphicon-remove");
+            }
+        };
+
+        function batchNumCheck(batchEle){
+            var v = batchEle.value;
+            if ($.isNumeric(v) === false) {
+                checkFile(false, "batch");
+                $("#batchIn").removeClass("has-success");
+                $("#batchIcon").removeClass("glyphicon-ok")
+                $("#" + "<%=saveSettings.ClientID%>").prop("disabled", true);
+            } else {
+                checkFile(true, "batch");
+                $("#batchIn").removeClass("has-error");
+                $("#batchIcon").removeClass("glyphicon-remove");
+                $("#" + "<%=saveSettings.ClientID%>").prop("disabled", false);
             }
         };
     </script>

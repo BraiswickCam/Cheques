@@ -52,7 +52,7 @@ namespace Cheques
             double checkValue = this.Amount * this.Value;
             if (Math.Round(checkValue, 2) != this.TotalValue)
             {
-                throw new FormatException("Cheque total does not add up!");
+                throw new BankChequeException("Cheque total does not add up!", this.JobNo, this.Booking, this.Collection, this.Index);
             }
         }
     }
@@ -68,14 +68,16 @@ namespace Cheques
 
         public BankChequeReader()
         {
-            this.Results = ReadResults();
+            try { this.Results = ReadResults(); }
+            catch (BankChequeException ex) { throw ex; }
             this.Results = SortArray();
         }
 
         public BankChequeReader(string chqListSource)
         {
             this.Source = chqListSource;
-            this.Results = ReadResults();
+            try { this.Results = ReadResults(); }
+            catch (BankChequeException ex) { throw ex; }
             this.Results = SortArray();
         }
 
@@ -91,7 +93,13 @@ namespace Cheques
                 {
                     values[i] = values[i].Substring(1, values[i].Length - 2);
                 }
-                bc.Add(new BankCheque(values));
+                try { bc.Add(new BankCheque(values)); }
+                catch (BankChequeException ex)
+                {
+                    sr.Dispose();
+                    sr.Close();
+                    throw ex;
+                }
             }
             sr.Dispose();
             sr.Close();
