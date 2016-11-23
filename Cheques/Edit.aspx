@@ -5,12 +5,56 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <script src="Scripts/jquery-1.9.1.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
 </head>
 <body>
     <form id="form1" runat="server">
-    <div>
-    
+    <div class="hidden">
+        <asp:GridView ID="errorGrid" runat="server" CssClass="table table-striped" GridLines="None"></asp:GridView>
     </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-offset-4 col-md-4">
+                    <h3>Job No.: <span id="jobNoSpan" runat="server"></span></h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-offset-4 col-md-4">
+                    <h3>Booking: <span id="bookingSpan" runat="server"></span></h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-offset-4 col-md-4">
+                    <h3>Collection: <span id="collectionSpan" runat="server"></span></h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-offset-4 col-md-4">
+                    <h3>Index: <span id="indexSpan" runat="server"></span></h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-offset-4 col-md-4">
+                    <div class="form-group">
+                        <label for="<%=chqValueText.ClientID %>" class="control-label">Cheque Value</label>
+                        <asp:TextBox ID="chqValueText" runat="server" CssClass="form-control"></asp:TextBox>
+                    </div>
+                    <div class="form-group">
+                        <label for="<%=amountText.ClientID %>" class="control-label">Quantity</label>
+                        <asp:TextBox ID="amountText" runat="server" CssClass="form-control"></asp:TextBox>
+                    </div>
+                    <div class="form-group">
+                        <label for="<%=totalValueText.ClientID %>" class="control-label">Total Value</label>
+                        <asp:TextBox ID="totalValueText" runat="server" CssClass="form-control"></asp:TextBox>
+                    </div>
+                    <div class="row text-center">
+                        <asp:Button ID="editSaveButton" runat="server" CssClass="btn btn-primary" Text="Save Entry" OnClick="editSaveButton_Click" />
+                    </div>
+                </div>
+            </div>
+        </div>
     </form>
 </body>
 </html>
