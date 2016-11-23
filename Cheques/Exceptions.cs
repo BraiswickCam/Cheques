@@ -64,4 +64,54 @@ namespace Cheques
             }
         }
     }
+
+    [Serializable]
+    public class BankChequeException : Exception
+    {
+        private string jobNo;
+        private int booking, collection, index;
+
+        public string JobNo { get { return jobNo; } set { jobNo = value; } }
+        public int Booking { get { return booking; } set { booking = value; } }
+        public int Collection { get { return collection; } set { collection = value; } }
+        public int Index { get { return index; } set { index = value; } }
+
+        public BankChequeException() { }
+
+        public BankChequeException(string message) : base(message) { }
+
+        public BankChequeException(string message, Exception innerException) : base(message, innerException) { }
+
+        public BankChequeException(string message, string _jobNo, int _booking, int _collection, int _index) : base(message)
+        {
+            this.JobNo = _jobNo;
+            this.Booking = _booking;
+            this.Collection = _collection;
+            this.Index = _index;
+        }
+
+        protected BankChequeException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+            if (info != null)
+            {
+                this.JobNo = info.GetString("JobNo");
+                this.Booking = info.GetInt32("Booking");
+                this.Collection = info.GetInt32("Collection");
+                this.Index = info.GetInt32("Index");
+            }
+        }
+
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData(info, context);
+
+            if (info != null)
+            {
+                info.AddValue("JobNo", this.JobNo);
+                info.AddValue("Booking", this.Booking);
+                info.AddValue("Collection", this.Collection);
+                info.AddValue("Index", this.Index);
+            }
+        }
+    }
 }
