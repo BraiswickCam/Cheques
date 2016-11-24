@@ -197,7 +197,14 @@ namespace Cheques
             StreamReader sr = new StreamReader(this.Source);
             while ((read = sr.ReadLine()) != null)
             {
-                string[] values = read.Split(',');
+                var reg = new System.Text.RegularExpressions.Regex("\".*?\"");
+                var matches = reg.Matches(read);
+                List<string> valueList = new List<string>();
+                foreach (var item in matches)
+                {
+                    valueList.Add(item.ToString());
+                }
+                string[] values = valueList.ToArray();
                 for (int i = 0; i < values.Length; i++)
                 {
                     values[i] = values[i].Substring(1, values[i].Length - 2);
