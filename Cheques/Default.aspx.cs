@@ -33,11 +33,38 @@ namespace Cheques
             CheckFiles();
         }
 
+        protected void finDayButton_Click(object sender, EventArgs e)
+        {
+            CheckFiles();
+            FinalizeDay();
+            CheckFiles();
+        }
+
         protected void CheckFiles()
         {
             path1 = File.Exists(ConfigurationManager.AppSettings["bankListPath"]);
             path2 = File.Exists(ConfigurationManager.AppSettings["bankChqListPath"]);
             path3 = Directory.Exists(ConfigurationManager.AppSettings["backupPath"]);
+        }
+
+        protected bool FinalizeDay()
+        {
+            if (path1 == false || path2 == false || path3 == false) { return false; }
+            else
+            {
+                string bankListPath = ConfigurationManager.AppSettings["bankListPath"];
+                string bankChqListPath = ConfigurationManager.AppSettings["bankChqListPath"];
+                string backupDir = String.Format("{0}\\{1}_FINAL", ConfigurationManager.AppSettings["backupPath"], DateTime.Now.ToString("yyyyddMM_HHmmss"));
+
+                Directory.CreateDirectory(backupDir);
+                File.Copy(bankListPath, String.Format("{0}\\BANKLIST.TXT", backupDir));
+                File.Copy(bankChqListPath, String.Format("{0}\\BANKCHQ.TXT", backupDir));
+
+                File.WriteAllText(bankListPath, "");
+                File.WriteAllText(bankChqListPath, "");
+
+                return true;
+            }
         }
     }
 }

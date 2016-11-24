@@ -73,7 +73,7 @@
                         <p>If not, finish banking and use the "Today's Summary" button to print your summary before finalizing day.</p>
                     </div>
                     <div class="modal-footer">
-                        <asp:Button ID="finDayButton" runat="server" CssClass="btn btn-danger" Text="Finalize Day" />
+                        <asp:Button ID="finDayButton" runat="server" CssClass="btn btn-danger" Text="Finalize Day" OnClick="finDayButton_Click" />
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                     </div>
                 </div>
