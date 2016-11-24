@@ -15,16 +15,19 @@ namespace Cheques
         public BankListReader blr;
         public BankList[] bl;
         public int errorIndex = -1;
+        public string mode;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Request.QueryString["mode"] == "chq")
             {
+                mode = "chq";
                 chqErrDiv.Attributes["class"] = "container-fluid";
                 ChequeEditLoad();
                 if (!IsPostBack) ChequeEditPopulate();
             }
             else if (Request.QueryString["mode"] == "list")
             {
+                mode = "list";
                 listErrDiv.Attributes["class"] = "container-fluid";
                 ListEditLoad();
                 if (!IsPostBack) ListEditPopulate();
