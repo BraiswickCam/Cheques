@@ -20,7 +20,7 @@
     <div class="hidden">
         <asp:GridView ID="errorGrid" runat="server" CssClass="table table-striped" GridLines="None"></asp:GridView>
     </div>
-        <div class="container-fluid" id="chqErrDiv" runat="server">
+        <div class="container-fluid hidden" id="chqErrDiv" runat="server">
             <div class="row">
                 <div class="col-md-offset-4 col-md-4">
                     <h3>Job No.: <span id="jobNoSpan" runat="server"></span></h3>
@@ -64,7 +64,7 @@
                 </div>
             </div>
         </div>
-        <div class="container-fluid" id="listErrDiv" runat="server">
+        <div class="container-fluid hidden" id="listErrDiv" runat="server">
             <div class="row">
                 <div class="col-md-offset-4 col-md-4">
                     <h3>Job No.: <span id="listJobNoSpan" runat="server"></span></h3>

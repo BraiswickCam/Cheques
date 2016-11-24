@@ -27,21 +27,21 @@ namespace Cheques
         public int Collection { get { return collection; } private set { collection = value; } }
 
         //Doubles (money)
-        public double Notes50 { get { return notes50; } private set { notes50 = value; } }
-        public double Notes20 { get { return notes20; } private set { notes20 = value; } }
-        public double Notes10 { get { return notes10; } private set { notes10 = value; } }
-        public double Notes5 { get { return notes5; } private set { notes5 = value; } }
-        public double Coins2 { get { return coins2; } private set { coins2 = value; } }
-        public double Coins1 { get { return coins1; } private set { coins1 = value; } }
-        public double Coins50 { get { return coins50; } private set { coins50 = value; } }
-        public double Coins20 { get { return coins20; } private set { coins20 = value; } }
-        public double Coins10 { get { return coins10; } private set { coins10 = value; } }
-        public double Coins5 { get { return coins5; } private set { coins5 = value; } }
-        public double CoinsBronze { get { return coinsBronze; } private set { coinsBronze = value; } }
-        public double ChequeTotal { get { return chequeTotal; } private set { chequeTotal = value; } }
-        public double VisaTotal { get { return visaTotal; } private set { visaTotal = value; } }
-        public double CashChequeTotal { get { return cashChequeTotal; } private set { cashChequeTotal = value; } }
-        public double Discount { get { return discount; } private set { discount = value; } }
+        public double Notes50 { get { return notes50; } set { notes50 = value; } }
+        public double Notes20 { get { return notes20; } set { notes20 = value; } }
+        public double Notes10 { get { return notes10; } set { notes10 = value; } }
+        public double Notes5 { get { return notes5; } set { notes5 = value; } }
+        public double Coins2 { get { return coins2; } set { coins2 = value; } }
+        public double Coins1 { get { return coins1; } set { coins1 = value; } }
+        public double Coins50 { get { return coins50; } set { coins50 = value; } }
+        public double Coins20 { get { return coins20; } set { coins20 = value; } }
+        public double Coins10 { get { return coins10; } set { coins10 = value; } }
+        public double Coins5 { get { return coins5; } set { coins5 = value; } }
+        public double CoinsBronze { get { return coinsBronze; } set { coinsBronze = value; } }
+        public double ChequeTotal { get { return chequeTotal; } set { chequeTotal = value; } }
+        public double VisaTotal { get { return visaTotal; } set { visaTotal = value; } }
+        public double CashChequeTotal { get { return cashChequeTotal; } set { cashChequeTotal = value; } }
+        public double Discount { get { return discount; } set { discount = value; } }
 
         public bool ErrorOut { get { return errorOut; } private set { errorOut = value; } }
 
