@@ -20,7 +20,9 @@ namespace Cheques
             if (FilesCopied(out error)) GenerateTables();
             else
             {
-                //error message
+                form1.Visible = false;
+                blankFileAlert.Attributes["class"] = "container-fluid";
+                mainAlert.InnerText = error + " Contact support.";
             }
         }
 
@@ -51,7 +53,7 @@ namespace Cheques
                 }
                 else
                 {
-                    errorMsg = "The BANCHQ.TXT file is missing!";
+                    errorMsg = "The BANKCHQ.TXT file is missing!";
                     return false;
                 }
             }
@@ -158,10 +160,20 @@ namespace Cheques
             gv.CssClass = "table table-striped table-condensed";
             gv.DataSource = _sumTable;
             gv.DataBind();
-            gv.FooterRow.Cells[0].Text = "<strong>TOTAL</strong>";
-            gv.FooterRow.Cells[1].Text = String.Format("<strong>{0}</strong>", _sumCount);
-            gv.FooterRow.Cells[2].Text = String.Format("<strong>{0}</strong>", _sumTotal.ToString("C2"));
-            col.Controls.Add(gv);
+            try
+            {
+                gv.FooterRow.Cells[0].Text = "<strong>TOTAL</strong>";
+                gv.FooterRow.Cells[1].Text = String.Format("<strong>{0}</strong>", _sumCount);
+                gv.FooterRow.Cells[2].Text = String.Format("<strong>{0}</strong>", _sumTotal.ToString("C2"));
+                col.Controls.Add(gv);
+            }
+            catch (NullReferenceException)
+            {
+                form1.Visible = false;
+                blankFileAlert.Attributes["class"] = "container-fluid";
+                mainAlert.InnerText = "Data files are blank! Contact support.";
+            }
+            
         }
 
         private void BoldRow(GridView gv, int rowIndex)

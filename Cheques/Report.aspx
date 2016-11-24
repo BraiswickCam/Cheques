@@ -35,6 +35,18 @@
     </style>
 </head>
 <body>
+    <div id="blankFileAlert" class="container-fluid hidden" runat="server">
+        <div class="row">
+            <div class="col-xs-offset-3 col-xs-6">
+                <div class="alert alert-danger" id="mainAlert" runat="server"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-offset-3 col-xs-6">
+                <a href="Default.aspx" class="btn btn-info"><span class="glyphicon glyphicon-home"></span> Home</a>
+            </div>
+        </div>
+    </div>
     <form id="form1" runat="server">
         <div class="container-fluid">
             <div class="row">
