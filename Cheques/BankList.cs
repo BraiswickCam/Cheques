@@ -14,6 +14,7 @@ namespace Cheques
         private string jobNo, school, packType;
         private int booking, collection;
         private double notes50, notes20, notes10, notes5, coins2, coins1, coins50, coins20, coins10, coins5, coinsBronze, chequeTotal, visaTotal, cashChequeTotal, discount;
+        private bool errorOut;
 
         //Properties
         //Strings
@@ -26,24 +27,26 @@ namespace Cheques
         public int Collection { get { return collection; } private set { collection = value; } }
 
         //Doubles (money)
-        public double Notes50 { get { return notes50; } private set { notes50 = value; } }
-        public double Notes20 { get { return notes20; } private set { notes20 = value; } }
-        public double Notes10 { get { return notes10; } private set { notes10 = value; } }
-        public double Notes5 { get { return notes5; } private set { notes5 = value; } }
-        public double Coins2 { get { return coins2; } private set { coins2 = value; } }
-        public double Coins1 { get { return coins1; } private set { coins1 = value; } }
-        public double Coins50 { get { return coins50; } private set { coins50 = value; } }
-        public double Coins20 { get { return coins20; } private set { coins20 = value; } }
-        public double Coins10 { get { return coins10; } private set { coins10 = value; } }
-        public double Coins5 { get { return coins5; } private set { coins5 = value; } }
-        public double CoinsBronze { get { return coinsBronze; } private set { coinsBronze = value; } }
-        public double ChequeTotal { get { return chequeTotal; } private set { chequeTotal = value; } }
-        public double VisaTotal { get { return visaTotal; } private set { visaTotal = value; } }
-        public double CashChequeTotal { get { return cashChequeTotal; } private set { cashChequeTotal = value; } }
-        public double Discount { get { return discount; } private set { discount = value; } }
+        public double Notes50 { get { return notes50; } set { notes50 = value; } }
+        public double Notes20 { get { return notes20; } set { notes20 = value; } }
+        public double Notes10 { get { return notes10; } set { notes10 = value; } }
+        public double Notes5 { get { return notes5; } set { notes5 = value; } }
+        public double Coins2 { get { return coins2; } set { coins2 = value; } }
+        public double Coins1 { get { return coins1; } set { coins1 = value; } }
+        public double Coins50 { get { return coins50; } set { coins50 = value; } }
+        public double Coins20 { get { return coins20; } set { coins20 = value; } }
+        public double Coins10 { get { return coins10; } set { coins10 = value; } }
+        public double Coins5 { get { return coins5; } set { coins5 = value; } }
+        public double CoinsBronze { get { return coinsBronze; } set { coinsBronze = value; } }
+        public double ChequeTotal { get { return chequeTotal; } set { chequeTotal = value; } }
+        public double VisaTotal { get { return visaTotal; } set { visaTotal = value; } }
+        public double CashChequeTotal { get { return cashChequeTotal; } set { cashChequeTotal = value; } }
+        public double Discount { get { return discount; } set { discount = value; } }
+
+        public bool ErrorOut { get { return errorOut; } private set { errorOut = value; } }
 
         //Constructor
-        public BankList(string[] values)
+        public BankList(string[] values, bool checkErrors = true)
         {
             this.JobNo = values[0];
 
@@ -164,8 +167,10 @@ namespace Cheques
             double totalCheck = this.Notes50 + this.Notes20 + this.Notes10 + this.Notes5 + this.Coins2 + this.Coins1 + this.Coins50 + this.Coins20 + this.Coins10 + this.Coins5 + this.CoinsBronze + this.ChequeTotal;
             if (Math.Round(totalCheck, 2) != this.CashChequeTotal)
             {
-                throw new BankListException("The total cash and cheque values do not add correctly on this line!", this.JobNo, this.School, this.PackType, this.Collection, this.Booking);
+                if (checkErrors) { throw new BankListException("The total cash and cheque values do not add correctly on this line!", this.JobNo, this.School, this.PackType, this.Collection, this.Booking); }
+                else { this.ErrorOut = true; }
             }
+            else { this.ErrorOut = false; }
         }
     }
 
@@ -175,34 +180,41 @@ namespace Cheques
         private BankList[] results;
 
         public string Source { get { return source; } private set { source = value; } }
-        public BankList[] Results { get { return results; } private set { results = value; } }
+        public BankList[] Results { get { return results; } set { results = value; } }
 
-        public BankListReader()
+        public BankListReader(bool checkErrors = true)
         {
-            try { this.Results = ReadResults(); }
+            try { this.Results = ReadResults(checkErrors); }
             catch (BankListException ex) { throw ex; }
         }
 
-        public BankListReader(string bankListSource)
+        public BankListReader(string bankListSource, bool checkErrors = true)
         {
             this.Source = bankListSource;
-            try { this.Results = ReadResults(); }
+            try { this.Results = ReadResults(checkErrors); }
             catch (BankListException ex) { throw ex; }
         }
 
-        private BankList[] ReadResults()
+        private BankList[] ReadResults(bool checkErrors)
         {
             string read;
             List<BankList> bl = new List<BankList>();
             StreamReader sr = new StreamReader(this.Source);
             while ((read = sr.ReadLine()) != null)
             {
-                string[] values = read.Split(',');
+                var reg = new System.Text.RegularExpressions.Regex("\".*?\"");
+                var matches = reg.Matches(read);
+                List<string> valueList = new List<string>();
+                foreach (var item in matches)
+                {
+                    valueList.Add(item.ToString());
+                }
+                string[] values = valueList.ToArray();
                 for (int i = 0; i < values.Length; i++)
                 {
                     values[i] = values[i].Substring(1, values[i].Length - 2);
                 }
-                try { bl.Add(new BankList(values)); }
+                try { bl.Add(new BankList(values, checkErrors)); }
                 catch (BankListException ex)
                 {
                     sr.Dispose();
@@ -213,6 +225,22 @@ namespace Cheques
             sr.Dispose();
             sr.Close();
             return bl.ToArray();
+        }
+
+        public void WriteResults()
+        {
+            StreamWriter sw = new StreamWriter(this.Source, false);
+            foreach (BankList bl in this.Results)
+            {
+                string write = String.Format("\"{0}\",\"{1}\",\"{2}\",\"{3}\",\"{4}\",\"{5}\",\"{6}\",\"{7}\",\"{8}\",\"{9}\",\"{10}\",\"{11}\",\"{12}\",\"{13}\",\"{14}\",\"{15}\",\"{16}\",\"{17}\",\"{18}\",\"{19}\"",
+                    bl.JobNo, bl.Booking, bl.Collection, bl.School, bl.PackType,
+                    bl.CashChequeTotal, bl.Discount, bl.Notes50, bl.Notes20, bl.Notes10,
+                    bl.Notes5, bl.Coins2, bl.Coins1, bl.Coins50, bl.Coins20,
+                    bl.Coins10, bl.Coins5, bl.CoinsBronze, bl.ChequeTotal, bl.VisaTotal);
+                sw.WriteLine(write);
+            }
+            sw.Dispose();
+            sw.Close();
         }
 
         public DataTable SchoolListTable()

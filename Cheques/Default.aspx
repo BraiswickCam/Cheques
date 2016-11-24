@@ -28,7 +28,7 @@
                     <a href="Report.aspx" class="btn btn-primary"><span class="glyphicon glyphicon-list-alt"></span> Today's Summary</a> <p>Generate today's banking summary.</p></br>
                 </div>
                 <div class="row">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#finmodal"><span class="glyphicon glyphicon-check"></span> Finalize Day</button> <p>Complete todays banking.</p></br>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#finmodal"><span class="glyphicon glyphicon-alert"></span> Finalize Day</button> <p>Complete todays banking.</p></br>
                 </div>
                 <div class="row">
                     <button type="button" id="adminSettings" class="btn btn-danger"><span class="glyphicon glyphicon-cog"></span> Admin Settings</button> <p>Change banking summary config.</p></br>
@@ -73,7 +73,7 @@
                         <p>If not, finish banking and use the "Today's Summary" button to print your summary before finalizing day.</p>
                     </div>
                     <div class="modal-footer">
-                        <asp:Button ID="finDayButton" runat="server" CssClass="btn btn-danger" Text="Finalize Day" />
+                        <asp:Button ID="finDayButton" runat="server" CssClass="btn btn-danger" Text="Finalize Day" OnClick="finDayButton_Click" />
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                     </div>
                 </div>

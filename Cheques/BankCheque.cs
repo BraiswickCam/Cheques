@@ -14,6 +14,7 @@ namespace Cheques
         private string jobNo;
         private int booking, collection, index, amount;
         private double _value, totalValue;
+        private bool errorIn, errorOut;
 
         //Properties
         public string JobNo { get { return jobNo; } private set { jobNo = value; } }
@@ -21,13 +22,16 @@ namespace Cheques
         public int Booking { get { return booking; } private set { booking = value; } }
         public int Collection { get { return collection; } private set { collection = value; } }
         public int Index { get { return index; } private set { index = value; } }
-        public int Amount { get { return amount; } private set { amount = value; } }
+        public int Amount { get { return amount; } set { amount = value; } }
 
-        public double Value { get { return _value; } private set { _value = value; } }
-        public double TotalValue { get { return totalValue; } private set { totalValue = value; } }
+        public double Value { get { return _value; } set { _value = value; } }
+        public double TotalValue { get { return totalValue; } set { totalValue = value; } }
+
+        public bool ErrorIn { get { return errorIn; } private set { errorIn = value; } }
+        public bool ErrorOut { get { return errorOut; } set { errorOut = value; } }
     
         //Constructor
-        public BankCheque(string[] values)
+        public BankCheque(string[] values, bool checkErrors = true)
         {
             this.JobNo = values[0];
 
@@ -52,8 +56,10 @@ namespace Cheques
             double checkValue = this.Amount * this.Value;
             if (Math.Round(checkValue, 2) != this.TotalValue)
             {
-                throw new BankChequeException("Cheque total does not add up!", this.JobNo, this.Booking, this.Collection, this.Index);
+                if (checkErrors) { throw new BankChequeException("Cheque total does not add up!", this.JobNo, this.Booking, this.Collection, this.Index); }
+                else { this.ErrorOut = true; }
             }
+            else { this.ErrorOut = false; }
         }
     }
 
@@ -63,37 +69,44 @@ namespace Cheques
         private BankCheque[] results;
 
         public string Source { get { return source; } private set { source = value; } }
-        public BankCheque[] Results { get { return results; } private set { results = value;} }
+        public BankCheque[] Results { get { return results; } set { results = value;} }
         public int SplitSize { get { return Convert.ToInt32(ConfigurationManager.AppSettings["batchSize"]); } }
 
-        public BankChequeReader()
+        public BankChequeReader(bool checkErrors = true)
         {
-            try { this.Results = ReadResults(); }
+            try { this.Results = ReadResults(checkErrors); }
             catch (BankChequeException ex) { throw ex; }
             this.Results = SortArray();
         }
 
-        public BankChequeReader(string chqListSource)
+        public BankChequeReader(string chqListSource, bool checkErrors = true)
         {
             this.Source = chqListSource;
-            try { this.Results = ReadResults(); }
+            try { this.Results = ReadResults(checkErrors); }
             catch (BankChequeException ex) { throw ex; }
             this.Results = SortArray();
         }
 
-        private BankCheque[] ReadResults()
+        private BankCheque[] ReadResults(bool checkErrors)
         {
             string read;
             List<BankCheque> bc = new List<BankCheque>();
             StreamReader sr = new StreamReader(this.Source);
             while ((read = sr.ReadLine()) != null)
             {
-                string[] values = read.Split(',');
+                var reg = new System.Text.RegularExpressions.Regex("\".*?\"");
+                var matches = reg.Matches(read);
+                List<string> valueList = new List<string>();
+                foreach (var item in matches)
+                {
+                    valueList.Add(item.ToString());
+                }
+                string[] values = valueList.ToArray();
                 for (int i = 0; i < values.Length; i++)
                 {
                     values[i] = values[i].Substring(1, values[i].Length - 2);
                 }
-                try { bc.Add(new BankCheque(values)); }
+                try { bc.Add(new BankCheque(values, checkErrors)); }
                 catch (BankChequeException ex)
                 {
                     sr.Dispose();
@@ -104,6 +117,25 @@ namespace Cheques
             sr.Dispose();
             sr.Close();
             return bc.ToArray();
+        }
+
+        public void WriteResults()
+        {
+            StreamWriter sw = new StreamWriter(this.Source, false);
+            foreach (BankCheque bc in this.Results)
+            {
+                string write = String.Format("\"{0}\",\"{1}\",\"{2}\",\"{3}\",\"{4}\",\"{5}\",\"{6}\"",
+                    bc.JobNo,
+                    bc.Booking,
+                    bc.Collection,
+                    bc.Index,
+                    bc.Value,
+                    bc.Amount,
+                    bc.TotalValue);
+                sw.WriteLine(write);
+            }
+            sw.Dispose();
+            sw.Close();
         }
 
         private BankCheque[] SortArray()

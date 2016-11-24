@@ -19,8 +19,11 @@
         </div>
     <div class="container container-fluid">
         <div class="row">
-            <div class="col-xs-12">
+            <div class="col-xs-10">
                 <h1 id="topTitle" runat="server">Banking Summary</h1>
+            </div>
+            <div class="col-xs-2">
+                <button onclick="window.print();" class="btn btn-primary hidden-print"><span class="glyphicon glyphicon-print"></span> Print</button>
             </div>
         </div>
         <div class="row">
