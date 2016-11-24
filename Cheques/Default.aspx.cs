@@ -26,8 +26,12 @@ namespace Cheques
 
         protected void saveSettings_Click(object sender, EventArgs e)
         {
-            ConfigurationManager.AppSettings["bankListPath"] = banklistPathText.Text;
-            ConfigurationManager.AppSettings["bankChqListPath"] = bankchqPathText.Text;
+            if (banklistPathText.Text.ToLower().Contains("banklist")) { ConfigurationManager.AppSettings["bankListPath"] = banklistPathText.Text; }
+            else { banklistPathText.Text = ConfigurationManager.AppSettings["bankListPath"]; }
+
+            if (bankchqPathText.Text.ToLower().Contains("bankchq")) { ConfigurationManager.AppSettings["bankChqListPath"] = bankchqPathText.Text; }
+            else { bankchqPathText.Text = ConfigurationManager.AppSettings["bankChqListPath"]; }
+
             ConfigurationManager.AppSettings["backupPath"] = backupPathText.Text;
             ConfigurationManager.AppSettings["batchSize"] = batchSplitText.Text;
             CheckFiles();
