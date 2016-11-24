@@ -43,7 +43,7 @@
         </div>
         <div class="row">
             <div class="col-xs-offset-3 col-xs-6">
-                <a href="Default.aspx" class="btn btn-info"><span class="glyphicon glyphicon-home"></span> Home</a>
+                <a href="Default.aspx" class="btn btn-info" id="mainAlertHomeButton" runat="server"><span class="glyphicon glyphicon-home"></span> Home</a>
             </div>
         </div>
     </div>

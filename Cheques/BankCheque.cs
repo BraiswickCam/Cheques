@@ -195,6 +195,7 @@ namespace Cheques
                     {
                         holder[0] = lc[i].Value;
                         holder[1] = 1;
+                        if (lc.Count == 1) { dt.Rows.Add(holder[0], holder[1], holder[0] * holder[1]); }
                     }
                     totalValue += lc[i].Value;
                 }

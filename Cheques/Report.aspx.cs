@@ -152,8 +152,6 @@ namespace Cheques
             col.Attributes["class"] = "col-xs-12";
             row.Controls.Add(col);
 
-            col.Controls.Add(new LiteralControl(String.Format("<h2>CHEQUE BATCH LIST</h2>")));
-
             GridView gv = new GridView();
             gv.GridLines = GridLines.None;
             gv.ShowFooter = true;
@@ -165,13 +163,16 @@ namespace Cheques
                 gv.FooterRow.Cells[0].Text = "<strong>TOTAL</strong>";
                 gv.FooterRow.Cells[1].Text = String.Format("<strong>{0}</strong>", _sumCount);
                 gv.FooterRow.Cells[2].Text = String.Format("<strong>{0}</strong>", _sumTotal.ToString("C2"));
+                col.Controls.Add(new LiteralControl(String.Format("<h2>CHEQUE BATCH LIST</h2>")));
                 col.Controls.Add(gv);
             }
             catch (NullReferenceException)
             {
-                form1.Visible = false;
-                blankFileAlert.Attributes["class"] = "container-fluid";
-                mainAlert.InnerText = "Data files are blank! Contact support.";
+                //form1.Visible = false;
+                blankFileAlert.Attributes["class"] = "container-fluid hidden-print";
+                mainAlert.Attributes["class"] = "alert alert-warning";
+                mainAlert.InnerText = "No cheques found in cheque list! If this is correct, ignore this message, otherwise contact support.";
+                mainAlertHomeButton.Visible = false;
             }
             
         }
