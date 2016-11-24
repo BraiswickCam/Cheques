@@ -75,8 +75,9 @@ namespace Cheques
             catch (BankChequeException ex)
             {
                 reportAlert.Attributes["class"] = "alert alert-danger";
-                reportAlert.InnerHtml = String.Format("<strong>ERROR!</strong> The cheques on the following line do not add up correctly!<br/>JobNo: {0}<br/>Booking: {1}<br/>Collection: {2}<br/>Index {3}<br/>",
-                    ex.JobNo, ex.Booking, ex.Collection, ex.Index);
+                reportAlert.InnerHtml = String.Format("<strong>ERROR!</strong> The cheques on the following line do not add up correctly!<br/>JobNo: {0}<br/>Booking: {1}<br/>Collection: {2}<br/>Index {3}<br/>{4}",
+                    ex.JobNo, ex.Booking, ex.Collection, ex.Index,
+                    "<a href=\"Edit.aspx?mode=chq\" class=\"btn btn-danger\"><span class=\"glyphicon glyphicon-wrench\"></span> Fix Errors</a>");
                 return false;
             }
 

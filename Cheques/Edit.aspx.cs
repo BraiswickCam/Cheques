@@ -15,8 +15,11 @@ namespace Cheques
         public int errorIndex = -1;
         protected void Page_Load(object sender, EventArgs e)
         {
-            ChequeEditLoad();
-            if (!IsPostBack) ChequeEditPopulate();
+            if (Request.QueryString["mode"] == "chq")
+            {
+                ChequeEditLoad();
+                if (!IsPostBack) ChequeEditPopulate();
+            }
         }
 
         private void ChequeEditTest()
