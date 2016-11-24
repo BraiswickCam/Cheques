@@ -22,26 +22,6 @@ namespace Cheques
             }
         }
 
-        private void ChequeEditTest()
-        {
-            BankChequeReader bcr = new BankChequeReader(false);
-            BankCheque[] bc = bcr.Results;
-            DataTable dt = new DataTable();
-            dt.Columns.Add("JobNo", typeof(string));
-            dt.Columns.Add("Booking", typeof(int));
-            dt.Columns.Add("Collection", typeof(int));
-            dt.Columns.Add("Index", typeof(int));
-            dt.Columns.Add("ChqValue", typeof(double));
-            dt.Columns.Add("Amount", typeof(int));
-            dt.Columns.Add("TotalValue", typeof(double));
-            foreach (BankCheque b in bc)
-            {
-                if (b.ErrorOut) dt.Rows.Add(b.JobNo, b.Booking, b.Collection, b.Index, b.Value, b.Amount, b.TotalValue);
-            }
-            errorGrid.DataSource = dt;
-            errorGrid.DataBind();
-        }
-
         private void ChequeEditLoad()
         {
             errorIndex = -1;
