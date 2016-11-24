@@ -8,6 +8,12 @@
     <link href="Content/bootstrap.css" rel="stylesheet" />
     <script src="Scripts/jquery-1.9.1.js"></script>
     <script src="Scripts/bootstrap.js"></script>
+
+    <style>
+        .top15 {
+            margin-top: 15px;
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -37,19 +43,22 @@
             </div>
             <div class="row">
                 <div class="col-md-offset-4 col-md-4">
-                    <div class="form-group">
-                        <label for="<%=chqValueText.ClientID %>" class="control-label">Cheque Value</label>
+                    <label for="<%=chqValueText.ClientID %>" class="control-label">Cheque Value</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-gbp"></i></span>
                         <asp:TextBox ID="chqValueText" runat="server" CssClass="form-control"></asp:TextBox>
                     </div>
-                    <div class="form-group">
-                        <label for="<%=amountText.ClientID %>" class="control-label">Quantity</label>
+                    <label for="<%=amountText.ClientID %>" class="control-label">Quantity</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-remove"></i></span>
                         <asp:TextBox ID="amountText" runat="server" CssClass="form-control"></asp:TextBox>
                     </div>
-                    <div class="form-group">
-                        <label for="<%=totalValueText.ClientID %>" class="control-label">Total Value</label>
+                    <label for="<%=totalValueText.ClientID %>" class="control-label">Total Value</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">= <i class="glyphicon glyphicon-gbp"></i></span>
                         <asp:TextBox ID="totalValueText" runat="server" CssClass="form-control"></asp:TextBox>
                     </div>
-                    <div class="row text-center">
+                    <div class="row text-center top15">
                         <asp:Button ID="editSaveButton" runat="server" CssClass="btn btn-primary" Text="Save Entry" OnClick="editSaveButton_Click" />
                     </div>
                 </div>
