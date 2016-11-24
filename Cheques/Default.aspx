@@ -28,7 +28,7 @@
                     <a href="Report.aspx" class="btn btn-primary"><span class="glyphicon glyphicon-list-alt"></span> Today's Summary</a> <p>Generate today's banking summary.</p></br>
                 </div>
                 <div class="row">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#finmodal"><span class="glyphicon glyphicon-alert"></span> Finalize Day</button> <p>Complete todays banking.</p></br>
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#finmodal"><span class="glyphicon glyphicon-alert"></span> Finalize Day</button> <p>Complete todays banking.</p></br>
                 </div>
                 <div class="row">
                     <button type="button" id="adminSettings" class="btn btn-danger"><span class="glyphicon glyphicon-cog"></span> Admin Settings</button> <p>Change banking summary config.</p></br>
