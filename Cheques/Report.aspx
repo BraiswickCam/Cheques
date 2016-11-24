@@ -7,6 +7,32 @@
     <title></title>
     <link href="Content/bootstrap.css" rel="stylesheet" />
     <script src="Scripts/jquery-1.9.1.js"></script>
+    <style>
+        @media screen {
+            body {
+                margin-top: 15px;
+            }
+        }
+
+        /*Print formatting*/
+        @media print {
+            body {
+                margin-top: 0px;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+
+            h2 {
+                font-size: 22px;
+            }
+
+            table, tr, td {
+                padding: 1px !important;
+            }
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -22,8 +48,11 @@
             <div class="col-xs-10">
                 <h1 id="topTitle" runat="server">Banking Summary</h1>
             </div>
-            <div class="col-xs-2">
-                <button onclick="window.print();" class="btn btn-primary hidden-print"><span class="glyphicon glyphicon-print"></span> Print</button>
+            <div class="col-xs-1">
+                <button onclick="window.print();" class="btn btn-warning hidden-print"><span class="glyphicon glyphicon-print"></span> Print</button>
+            </div>
+            <div class="col-xs-1">
+                <a href="Default.aspx" class="btn btn-info hidden-print"><span class="glyphicon glyphicon-home"></span> Home</a>
             </div>
         </div>
         <div class="row">

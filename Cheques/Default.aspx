@@ -66,11 +66,11 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title"><span class="glyphicon glyphicon-check"></span> Finalize Day</h4>
+                        <h4 class="modal-title"><span class="glyphicon glyphicon-alert"></span> Finalize Day</h4>
                     </div>
                     <div class="modal-body">
-                        <h4><span class="glyphicon glyphicon-alert"></span> <strong>Have you finished banking for the day and printed a summary?</strong></h4>
-                        <p>If not, finish banking and use the "Today's Summary" button to print your summary before finalizing day.</p>
+                        <h3 style="color: #d9534f;"><span class="glyphicon glyphicon-alert"></span> <strong>Have you finished banking for the day and printed a summary?</strong></h3>
+                        <p>If not, finish banking and use the "Today's Summary" button to print your summary <strong>before</strong> finalizing day.</p>
                     </div>
                     <div class="modal-footer">
                         <asp:Button ID="finDayButton" runat="server" CssClass="btn btn-danger" Text="Finalize Day" OnClick="finDayButton_Click" />
