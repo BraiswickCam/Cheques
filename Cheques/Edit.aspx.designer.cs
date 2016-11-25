@@ -166,6 +166,15 @@ namespace Cheques {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl listPackSpan;
         
         /// <summary>
+        /// groupListCashChq control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl groupListCashChq;
+        
+        /// <summary>
         /// listCashChqTotal control.
         /// </summary>
         /// <remarks>
@@ -173,6 +182,15 @@ namespace Cheques {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox listCashChqTotal;
+        
+        /// <summary>
+        /// groupListDiscount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl groupListDiscount;
         
         /// <summary>
         /// listDiscount control.
@@ -184,6 +202,15 @@ namespace Cheques {
         protected global::System.Web.UI.WebControls.TextBox listDiscount;
         
         /// <summary>
+        /// groupListNotes50 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl groupListNotes50;
+        
+        /// <summary>
         /// listNotes50 control.
         /// </summary>
         /// <remarks>
@@ -191,6 +218,15 @@ namespace Cheques {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox listNotes50;
+        
+        /// <summary>
+        /// groupListNotes20 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl groupListNotes20;
         
         /// <summary>
         /// listNotes20 control.
@@ -202,6 +238,15 @@ namespace Cheques {
         protected global::System.Web.UI.WebControls.TextBox listNotes20;
         
         /// <summary>
+        /// groupListNotes10 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl groupListNotes10;
+        
+        /// <summary>
         /// listNotes10 control.
         /// </summary>
         /// <remarks>
@@ -209,6 +254,15 @@ namespace Cheques {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox listNotes10;
+        
+        /// <summary>
+        /// groupListNotes5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl groupListNotes5;
         
         /// <summary>
         /// listNotes5 control.
@@ -220,6 +274,15 @@ namespace Cheques {
         protected global::System.Web.UI.WebControls.TextBox listNotes5;
         
         /// <summary>
+        /// groupListCoins2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl groupListCoins2;
+        
+        /// <summary>
         /// listCoins2 control.
         /// </summary>
         /// <remarks>
@@ -227,6 +290,15 @@ namespace Cheques {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox listCoins2;
+        
+        /// <summary>
+        /// groupListCoins1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl groupListCoins1;
         
         /// <summary>
         /// listCoins1 control.
@@ -238,6 +310,15 @@ namespace Cheques {
         protected global::System.Web.UI.WebControls.TextBox listCoins1;
         
         /// <summary>
+        /// groupListCoins50 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl groupListCoins50;
+        
+        /// <summary>
         /// listCoins50 control.
         /// </summary>
         /// <remarks>
@@ -245,6 +326,15 @@ namespace Cheques {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox listCoins50;
+        
+        /// <summary>
+        /// groupListCoins20 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl groupListCoins20;
         
         /// <summary>
         /// listCoins20 control.
@@ -256,6 +346,15 @@ namespace Cheques {
         protected global::System.Web.UI.WebControls.TextBox listCoins20;
         
         /// <summary>
+        /// groupListCoins10 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl groupListCoins10;
+        
+        /// <summary>
         /// listCoins10 control.
         /// </summary>
         /// <remarks>
@@ -263,6 +362,15 @@ namespace Cheques {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox listCoins10;
+        
+        /// <summary>
+        /// groupListCoins5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl groupListCoins5;
         
         /// <summary>
         /// listCoins5 control.

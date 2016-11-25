@@ -93,12 +93,12 @@
             <div class="row">
                 <div class="col-md-offset-4 col-md-4">
                     <label for="<%=listCashChqTotal.ClientID %>" class="control-label">Cash + Cheque Total</label>
-                    <div class="input-group">
+                    <div class="input-group" id="groupListCashChq" runat="server">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-gbp"></i></span>
                         <asp:TextBox ID="listCashChqTotal" runat="server" CssClass="form-control"></asp:TextBox>
                     </div>
                     <label for="<%=listDiscount.ClientID %>" class="control-label">Discount</label>
-                    <div class="input-group">
+                    <div class="input-group" id="groupListDiscount" runat="server">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-gbp"></i></span>
                         <asp:TextBox ID="listDiscount" runat="server" CssClass="form-control"></asp:TextBox>
                     </div>
@@ -107,54 +107,54 @@
             <div class="row">
                 <div class="col-md-offset-4 col-md-2">
                     <label for="<%=listNotes50.ClientID %>" class="control-label">£50 notes</label>
-                    <div class="input-group">
+                    <div class="input-group" id="groupListNotes50" runat="server">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-gbp"></i></span>
                         <asp:TextBox ID="listNotes50" runat="server" CssClass="form-control"></asp:TextBox>
                     </div>
                     <label for="<%=listNotes20.ClientID %>" class="control-label">£20 notes</label>
-                    <div class="input-group">
+                    <div class="input-group" id="groupListNotes20" runat="server">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-gbp"></i></span>
                         <asp:TextBox ID="listNotes20" runat="server" CssClass="form-control"></asp:TextBox>
                     </div>
                     <label for="<%=listNotes10.ClientID %>" class="control-label">£10 notes</label>
-                    <div class="input-group">
+                    <div class="input-group" id="groupListNotes10" runat="server">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-gbp"></i></span>
                         <asp:TextBox ID="listNotes10" runat="server" CssClass="form-control"></asp:TextBox>
                     </div>
                     <label for="<%=listNotes5.ClientID %>" class="control-label">£5 notes</label>
-                    <div class="input-group">
+                    <div class="input-group" id="groupListNotes5" runat="server">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-gbp"></i></span>
                         <asp:TextBox ID="listNotes5" runat="server" CssClass="form-control"></asp:TextBox>
                     </div>
                     <label for="<%=listCoins2.ClientID %>" class="control-label">£2 coins</label>
-                    <div class="input-group">
+                    <div class="input-group" id="groupListCoins2" runat="server">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-gbp"></i></span>
                         <asp:TextBox ID="listCoins2" runat="server" CssClass="form-control"></asp:TextBox>
                     </div>
                     <label for="<%=listCoins1.ClientID %>" class="control-label">£1 coins</label>
-                    <div class="input-group">
+                    <div class="input-group" id="groupListCoins1" runat="server">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-gbp"></i></span>
                         <asp:TextBox ID="listCoins1" runat="server" CssClass="form-control"></asp:TextBox>
                     </div>
                 </div>
                 <div class="col-md-2">
                     <label for="<%=listCoins50.ClientID %>" class="control-label">50p coins</label>
-                    <div class="input-group">
+                    <div class="input-group" id="groupListCoins50" runat="server">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-gbp"></i></span>
                         <asp:TextBox ID="listCoins50" runat="server" CssClass="form-control"></asp:TextBox>
                     </div>
                     <label for="<%=listCoins20.ClientID %>" class="control-label">20p coins</label>
-                    <div class="input-group">
+                    <div class="input-group" id="groupListCoins20" runat="server">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-gbp"></i></span>
                         <asp:TextBox ID="listCoins20" runat="server" CssClass="form-control"></asp:TextBox>
                     </div>
                     <label for="<%=listCoins10.ClientID %>" class="control-label">10p coins</label>
-                    <div class="input-group">
+                    <div class="input-group" id="groupListCoins10" runat="server">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-gbp"></i></span>
                         <asp:TextBox ID="listCoins10" runat="server" CssClass="form-control"></asp:TextBox>
                     </div>
                     <label for="<%=listCoins5.ClientID %>" class="control-label">5p coins</label>
-                    <div class="input-group">
+                    <div class="input-group" id="groupListCoins5" runat="server">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-gbp"></i></span>
                         <asp:TextBox ID="listCoins5" runat="server" CssClass="form-control"></asp:TextBox>
                     </div>

@@ -113,6 +113,22 @@ namespace Cheques
                     listCheque.Text = bl[i].ChequeTotal.ToString();
                     listVisa.Text = bl[i].VisaTotal.ToString();
 
+                    if (bl[i].DenomError)
+                    {
+                        string error = bl[i].DenomFlag;
+                        groupListCashChq.Attributes["class"] = "input-group has-error";
+                        if (error == "Notes50") groupListNotes50.Attributes["class"] = "input-group has-error";
+                        else if (error == "Notes20") groupListNotes20.Attributes["class"] = "input-group has-error";
+                        else if (error == "Notes10") groupListNotes10.Attributes["class"] = "input-group has-error";
+                        else if (error == "Notes5") groupListNotes5.Attributes["class"] = "input-group has-error";
+                        else if (error == "Coins2") groupListCoins2.Attributes["class"] = "input-group has-error";
+                        else if (error == "Coins1") groupListCoins1.Attributes["class"] = "input-group has-error";
+                        else if (error == "Coins50") groupListCoins50.Attributes["class"] = "input-group has-error";
+                        else if (error == "Coins20") groupListCoins20.Attributes["class"] = "input-group has-error";
+                        else if (error == "Coins10") groupListCoins10.Attributes["class"] = "input-group has-error";
+                        else if (error == "Coins5") groupListCoins5.Attributes["class"] = "input-group has-error";
+                    }
+
                     errorIndex = i;
                     break;
                 }
