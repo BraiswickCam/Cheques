@@ -96,6 +96,10 @@
                     <div class="input-group" id="groupListCashChq" runat="server">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-gbp"></i></span>
                         <asp:TextBox ID="listCashChqTotal" runat="server" CssClass="form-control"></asp:TextBox>
+                        <div class="input-group-btn">
+                            <button class="btn btn-info" type="button" onclick="document.getElementById('<%=listCashChqTotal.ClientID %>').value = CalculateTotal();">
+                                <span class="glyphicon glyphicon-refresh"></span> Calculate</button>
+                        </div>
                     </div>
                     <label for="<%=listDiscount.ClientID %>" class="control-label">Discount</label>
                     <div class="input-group" id="groupListDiscount" runat="server">
@@ -184,5 +188,22 @@
             </div>
         </div>
     </form>
+    <script>
+        function CalculateTotal() {
+            var notes50 = parseFloat(document.getElementById("<%=listNotes50.ClientID %>").value);
+            var notes20 = parseFloat(document.getElementById("<%=listNotes20.ClientID %>").value);
+            var notes10 = parseFloat(document.getElementById("<%=listNotes10.ClientID %>").value);
+            var notes5 = parseFloat(document.getElementById("<%=listNotes5.ClientID %>").value);
+            var coins2 = parseFloat(document.getElementById("<%=listCoins2.ClientID %>").value);
+            var coins1 = parseFloat(document.getElementById("<%=listCoins1.ClientID %>").value);
+            var coins50 = parseFloat(document.getElementById("<%=listCoins50.ClientID %>").value);
+            var coins20 = parseFloat(document.getElementById("<%=listCoins20.ClientID %>").value);
+            var coins10 = parseFloat(document.getElementById("<%=listCoins10.ClientID %>").value);
+            var coins5 = parseFloat(document.getElementById("<%=listCoins5.ClientID %>").value);
+            var coinsBronze = parseFloat(document.getElementById("<%=listCoinsBronze.ClientID %>").value);
+            var cheques = parseFloat(document.getElementById("<%=listCheque.ClientID %>").value);
+            return parseFloat(notes50 + notes20 + notes10 + notes5 + coins2 + coins1 + coins50 + coins20 + coins10 + coins5 + coinsBronze + cheques).toFixed(2);
+        };
+    </script>
 </body>
 </html>
