@@ -114,4 +114,51 @@ namespace Cheques
             }
         }
     }
+
+    [Serializable]
+    public class DenominationException : Exception
+    {
+        private string _denomination;
+        private double _value;
+        private BankList _bankListItem;
+
+        public string Denomination { get { return _denomination; } set { _denomination = value; } }
+        public double Value { get { return _value; } set { _value = value; } }
+        public BankList BankListItem { get { return _bankListItem; } set { _bankListItem = value; } }
+
+        public DenominationException() { }
+
+        public DenominationException(string message) : base(message) { }
+
+        public DenominationException(string message, Exception innerException) : base(message, innerException) { }
+
+        public DenominationException(string message, BankList bankList, string denomination, double value) : base(message)
+        {
+            this.BankListItem = bankList;
+            this.Denomination = denomination;
+            this.Value = value;
+        }
+
+        protected DenominationException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+            if (info != null)
+            {
+                this.BankListItem = (BankList)info.GetValue("BankListItem", typeof(BankList));
+                this.Denomination = info.GetString("Denomination");
+                this.Value = info.GetDouble("Value");
+            }
+        }
+
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData(info, context);
+
+            if (info != null)
+            {
+                info.AddValue("BankListItem", this.BankListItem, typeof(BankList));
+                info.AddValue("Denomination", this.Denomination);
+                info.AddValue("Value", this.Value);
+            }
+        }
+    }
 }
