@@ -11,16 +11,17 @@ namespace Cheques
     public class BankList
     {
         //Variables
-        private string jobNo, school, packType;
+        private string jobNo, school, packType, denomFlag;
         private int booking, collection;
         private double notes50, notes20, notes10, notes5, coins2, coins1, coins50, coins20, coins10, coins5, coinsBronze, chequeTotal, visaTotal, cashChequeTotal, discount;
-        private bool errorOut;
+        private bool errorOut, denomError;
 
         //Properties
         //Strings
         public string JobNo { get { return jobNo; } private set { jobNo = value.ToString(); } }
         public string School { get { return school; } private set { school = value; } }
         public string PackType { get { return packType; } private set { packType = value; } }
+        public string DenomFlag { get { return denomFlag; } set { denomFlag = value; } }
         
         //Integers
         public int Booking { get { return booking; } private set { booking = value; } }
@@ -44,6 +45,7 @@ namespace Cheques
         public double Discount { get { return discount; } set { discount = value; } }
 
         public bool ErrorOut { get { return errorOut; } private set { errorOut = value; } }
+        public bool DenomError { get { return denomError; } private set { denomError = value; } }
 
         //Constructor
         public BankList(string[] values, bool checkErrors = true)
@@ -79,12 +81,22 @@ namespace Cheques
                 if (values[7] == string.Empty) { this.Notes50 = 0; }
                 else { throw new FormatException("Notes50 is not a valid double"); }
             }
+            if (this.Notes50 % 50 != 0)
+            {
+                this.DenomError = true;
+                this.DenomFlag = "Notes50";
+            }
 
             try { this.Notes20 = Convert.ToDouble(values[8]); }
             catch (System.FormatException)
             {
                 if (values[8] == string.Empty) { this.Notes20 = 0; }
                 else { throw new FormatException("Notes20 is not a valid double"); }
+            }
+            if (this.Notes20 % 20 != 0)
+            {
+                this.DenomError = true;
+                this.DenomFlag = "Notes20";
             }
 
             try { this.Notes10 = Convert.ToDouble(values[9]); }
@@ -93,12 +105,22 @@ namespace Cheques
                 if (values[9] == string.Empty) { this.Notes10 = 0; }
                 else { throw new FormatException("Notes10 is not a valid double"); }
             }
+            if (this.Notes10 % 10 != 0)
+            {
+                this.DenomError = true;
+                this.DenomFlag = "Notes10";
+            }
 
             try { this.Notes5 = Convert.ToDouble(values[10]); }
             catch (System.FormatException)
             {
                 if (values[10] == string.Empty) { this.Notes5 = 0; }
                 else { throw new FormatException("Notes5 is not a valid double"); }
+            }
+            if (this.Notes5 % 5 != 0)
+            {
+                this.DenomError = true;
+                this.DenomFlag = "Notes5";
             }
 
             try { this.Coins2 = Convert.ToDouble(values[11]); }
@@ -107,12 +129,22 @@ namespace Cheques
                 if (values[11] == string.Empty) { this.Coins2 = 0; }
                 else { throw new FormatException("Coins2 is not a valid double"); }
             }
+            if (this.Coins2 % 2 != 0)
+            {
+                this.DenomError = true;
+                this.DenomFlag = "Coins2";
+            }
 
             try { this.Coins1 = Convert.ToDouble(values[12]); }
             catch (System.FormatException)
             {
                 if (values[12] == string.Empty) { this.Coins1 = 0; }
                 else { throw new FormatException("Coins1 is not a valid double"); }
+            }
+            if (this.Coins1 % 1 != 0)
+            {
+                this.DenomError = true;
+                this.DenomFlag = "Coins1";
             }
 
             try { this.Coins50 = Convert.ToDouble(values[13]); }
@@ -121,12 +153,22 @@ namespace Cheques
                 if (values[13] == string.Empty) { this.Coins50 = 0; }
                 else { throw new FormatException("Coins50 is not a valid double"); }
             }
+            if (Math.Round((this.Coins50 * 100), 2) % 50 != 0)
+            {
+                this.DenomError = true;
+                this.DenomFlag = "Coins50";
+            }
 
             try { this.Coins20 = Convert.ToDouble(values[14]); }
             catch (System.FormatException)
             {
                 if (values[14] == string.Empty) { this.Coins20 = 0; }
                 else { throw new FormatException("Coins20 is not a valid double"); }
+            }
+            if (Math.Round((this.Coins20 * 100), 2) % 20 != 0)
+            {
+                this.DenomError = true;
+                this.DenomFlag = "Coins20";
             }
 
             try { this.Coins10 = Convert.ToDouble(values[15]); }
@@ -135,12 +177,22 @@ namespace Cheques
                 if (values[15] == string.Empty) { this.Coins10 = 0; }
                 else { throw new FormatException("Coins10 is not a valid double"); }
             }
+            if (Math.Round((this.Coins10 * 100), 2) % 10 != 0)
+            {
+                this.DenomError = true;
+                this.DenomFlag = "Coins10";
+            }
 
             try { this.Coins5 = Convert.ToDouble(values[16]); }
             catch (System.FormatException)
             {
                 if (values[16] == string.Empty) { this.Coins5 = 0; }
                 else { throw new FormatException("Coins5 is not a valid double"); }
+            }
+            if (Math.Round((this.Coins5 * 100), 2) % 5 != 0)
+            {
+                this.DenomError = true;
+                this.DenomFlag = "Coins5";
             }
 
             try { this.CoinsBronze = Convert.ToDouble(values[17]); }
@@ -171,6 +223,11 @@ namespace Cheques
                 else { this.ErrorOut = true; }
             }
             else { this.ErrorOut = false; }
+            if (this.DenomError)
+            {
+                if (checkErrors) { throw new DenominationException("A demonination does not add up correctly!", this.JobNo, this.School, this.PackType, this.Collection, this.Booking, this.DenomFlag); }
+                else { this.ErrorOut = true; }
+            }
         }
     }
 
@@ -216,6 +273,12 @@ namespace Cheques
                 }
                 try { bl.Add(new BankList(values, checkErrors)); }
                 catch (BankListException ex)
+                {
+                    sr.Dispose();
+                    sr.Close();
+                    throw ex;
+                }
+                catch (DenominationException ex)
                 {
                     sr.Dispose();
                     sr.Close();

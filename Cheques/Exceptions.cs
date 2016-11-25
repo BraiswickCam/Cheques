@@ -119,12 +119,17 @@ namespace Cheques
     public class DenominationException : Exception
     {
         private string _denomination;
-        private double _value;
-        private BankList _bankListItem;
+        private string jobNo, school, packType;
+        private int collection, booking;
+
+        public string JobNo { get { return jobNo; } set { jobNo = value; } }
+        public string School { get { return school; } set { school = value; } }
+        public string PackType { get { return packType; } set { packType = value; } }
+
+        public int Collection { get { return collection; } set { collection = value; } }
+        public int Booking { get { return booking; } set { booking = value; } }
 
         public string Denomination { get { return _denomination; } set { _denomination = value; } }
-        public double Value { get { return _value; } set { _value = value; } }
-        public BankList BankListItem { get { return _bankListItem; } set { _bankListItem = value; } }
 
         public DenominationException() { }
 
@@ -132,20 +137,26 @@ namespace Cheques
 
         public DenominationException(string message, Exception innerException) : base(message, innerException) { }
 
-        public DenominationException(string message, BankList bankList, string denomination, double value) : base(message)
+        public DenominationException(string message, string _jobNo, string _school, string _packType, int _collection, int _booking, string denomination) : base(message)
         {
-            this.BankListItem = bankList;
             this.Denomination = denomination;
-            this.Value = value;
+            this.JobNo = _jobNo;
+            this.School = _school;
+            this.PackType = _packType;
+            this.Collection = _collection;
+            this.Booking = _booking;
         }
 
         protected DenominationException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
             if (info != null)
             {
-                this.BankListItem = (BankList)info.GetValue("BankListItem", typeof(BankList));
                 this.Denomination = info.GetString("Denomination");
-                this.Value = info.GetDouble("Value");
+                this.JobNo = info.GetString("JobNo");
+                this.School = info.GetString("School");
+                this.PackType = info.GetString("PackType");
+                this.Collection = info.GetInt32("Collection");
+                this.Booking = info.GetInt32("Booking");
             }
         }
 
@@ -155,9 +166,12 @@ namespace Cheques
 
             if (info != null)
             {
-                info.AddValue("BankListItem", this.BankListItem, typeof(BankList));
+                info.AddValue("JobNo", this.JobNo);
+                info.AddValue("School", this.School);
+                info.AddValue("PackType", this.PackType);
+                info.AddValue("Collection", this.Collection);
+                info.AddValue("Booking", this.Booking);
                 info.AddValue("Denomination", this.Denomination);
-                info.AddValue("Value", this.Value);
             }
         }
     }

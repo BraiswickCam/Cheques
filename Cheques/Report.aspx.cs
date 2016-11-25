@@ -73,6 +73,15 @@ namespace Cheques
                     "<a href=\"Edit.aspx?mode=list\" class=\"btn btn-danger\"><span class=\"glyphicon glyphicon-wrench\"></span> Fix Errors</a>");
                 return false;
             }
+            catch (DenominationException ex)
+            {
+                reportAlert.Attributes["class"] = "alert alert-danger";
+                reportAlert.InnerHtml = String.Format("<strong>ERROR!</strong> The {6} denomination does not add up correctly for the following job!<br/>JobNo: {0}<br/>Booking: {1}<br/>Collection: {2}<br/>School: {3}<br/>Pack: {4}</br>{5}",
+                    ex.JobNo, ex.Booking, ex.Collection, ex.School, ex.PackType,
+                    "<a href=\"Edit.aspx?mode=list\" class=\"btn btn-danger\"><span class=\"glyphicon glyphicon-wrench\"></span> Fix Errors</a>",
+                    ex.Denomination);
+                return false;
+            }
 
             try { bcr = new BankChequeReader(); }
             catch (BankChequeException ex)
