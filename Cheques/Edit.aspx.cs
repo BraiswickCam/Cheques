@@ -116,27 +116,27 @@ namespace Cheques
                     if (bl[i].DenomError)
                     {
                         string error = bl[i].DenomFlag;
-                        groupListCashChq.Attributes["class"] = "input-group has-error";
-                        if (error == "Notes50") groupListNotes50.Attributes["class"] = "input-group has-error";
-                        else groupListNotes50.Attributes["class"] = "input-group";
-                        if (error == "Notes20") groupListNotes20.Attributes["class"] = "input-group has-error";
-                        else groupListNotes20.Attributes["class"] = "input-group";
-                        if (error == "Notes10") groupListNotes10.Attributes["class"] = "input-group has-error";
-                        else groupListNotes10.Attributes["class"] = "input-group";
-                        if (error == "Notes5") groupListNotes5.Attributes["class"] = "input-group has-error";
-                        else groupListNotes5.Attributes["class"] = "input-group";
-                        if (error == "Coins2") groupListCoins2.Attributes["class"] = "input-group has-error";
-                        else groupListCoins2.Attributes["class"] = "input-group";
-                        if (error == "Coins1") groupListCoins1.Attributes["class"] = "input-group has-error";
-                        else groupListCoins1.Attributes["class"] = "input-group";
-                        if (error == "Coins50") groupListCoins50.Attributes["class"] = "input-group has-error";
-                        else groupListCoins50.Attributes["class"] = "input-group";
-                        if (error == "Coins20") groupListCoins20.Attributes["class"] = "input-group has-error";
-                        else groupListCoins20.Attributes["class"] = "input-group";
-                        if (error == "Coins10") groupListCoins10.Attributes["class"] = "input-group has-error";
-                        else groupListCoins10.Attributes["class"] = "input-group";
-                        if (error == "Coins5") groupListCoins5.Attributes["class"] = "input-group has-error";
-                        else groupListCoins5.Attributes["class"] = "input-group";
+                        groupListCashChq.Attributes["class"] = "form-group has-error";
+                        if (error == "Notes50") groupListNotes50.Attributes["class"] = "form-group has-error";
+                        else groupListNotes50.Attributes["class"] = "form-group";
+                        if (error == "Notes20") groupListNotes20.Attributes["class"] = "form-group has-error";
+                        else groupListNotes20.Attributes["class"] = "form-group";
+                        if (error == "Notes10") groupListNotes10.Attributes["class"] = "form-group has-error";
+                        else groupListNotes10.Attributes["class"] = "form-group";
+                        if (error == "Notes5") groupListNotes5.Attributes["class"] = "form-group has-error";
+                        else groupListNotes5.Attributes["class"] = "form-group";
+                        if (error == "Coins2") groupListCoins2.Attributes["class"] = "form-group has-error";
+                        else groupListCoins2.Attributes["class"] = "form-group";
+                        if (error == "Coins1") groupListCoins1.Attributes["class"] = "form-group has-error";
+                        else groupListCoins1.Attributes["class"] = "form-group";
+                        if (error == "Coins50") groupListCoins50.Attributes["class"] = "form-group has-error";
+                        else groupListCoins50.Attributes["class"] = "form-group";
+                        if (error == "Coins20") groupListCoins20.Attributes["class"] = "form-group has-error";
+                        else groupListCoins20.Attributes["class"] = "form-group";
+                        if (error == "Coins10") groupListCoins10.Attributes["class"] = "form-group has-error";
+                        else groupListCoins10.Attributes["class"] = "form-group";
+                        if (error == "Coins5") groupListCoins5.Attributes["class"] = "form-group has-error";
+                        else groupListCoins5.Attributes["class"] = "form-group";
                     }
 
                     errorIndex = i;
