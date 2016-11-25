@@ -166,6 +166,7 @@ namespace Cheques
             gv.ShowFooter = true;
             gv.CssClass = "table table-striped table-condensed";
             gv.DataSource = _sumTable;
+            gv.RowDataBound += VisaList_RowDataBound;
             gv.DataBind();
             try
             {
