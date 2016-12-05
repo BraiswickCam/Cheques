@@ -147,6 +147,18 @@ namespace Cheques
 
         protected void editSaveButton_Click(object sender, EventArgs e)
         {
+            if (Request.QueryString["mode"] == "chq")
+            {
+                mode = "chq";
+                chqErrDiv.Attributes["class"] = "container-fluid";
+                ChequeEditLoad();
+            }
+            else if (Request.QueryString["mode"] == "list")
+            {
+                mode = "list";
+                listErrDiv.Attributes["class"] = "container-fluid";
+                ListEditLoad();
+            }
             SaveEntry();
         }
 
@@ -200,6 +212,18 @@ namespace Cheques
 
         protected void listSaveButton_Click(object sender, EventArgs e)
         {
+            if (Request.QueryString["mode"] == "chq")
+            {
+                mode = "chq";
+                chqErrDiv.Attributes["class"] = "container-fluid";
+                ChequeEditLoad();
+            }
+            else if (Request.QueryString["mode"] == "list")
+            {
+                mode = "list";
+                listErrDiv.Attributes["class"] = "container-fluid";
+                ListEditLoad();
+            }
             ListSaveEntry();
         }
     }

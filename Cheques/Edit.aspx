@@ -8,6 +8,7 @@
     <link href="Content/bootstrap.css" rel="stylesheet" />
     <script src="Scripts/jquery-1.9.1.js"></script>
     <script src="Scripts/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
 
     <style>
         .top15 {
@@ -20,6 +21,14 @@
     <div class="hidden">
         <asp:GridView ID="errorGrid" runat="server" CssClass="table table-striped" GridLines="None"></asp:GridView>
     </div>
+        <asp:ScriptManager ID="ScriptManager1" runat="server" />
+        <asp:UpdateProgress runat="server" id="PageUpdateProgress">
+            <ProgressTemplate>
+                <div id="spinnerDiv"></div>
+            </ProgressTemplate>
+        </asp:UpdateProgress>
+        <asp:UpdatePanel runat="server" id="Panel">
+            <ContentTemplate>
         <div class="container-fluid hidden" id="chqErrDiv" runat="server">
             <div class="row">
                 <div class="col-md-offset-4 col-md-4">
@@ -209,6 +218,8 @@
                 </div>
             </div>
         </div>
+                </ContentTemplate>
+        </asp:UpdatePanel>
     </form>
     <script>
         function CalculateTotal() {
@@ -227,5 +238,33 @@
             return parseFloat(notes50 + notes20 + notes10 + notes5 + coins2 + coins1 + coins50 + coins20 + coins10 + coins5 + coinsBronze + cheques).toFixed(2);
         };
     </script>
+    <script type="text/javascript">
+
+    window.onload = function () {
+        var opts = {
+            lines: 14, // The number of lines to draw
+            length: 7, // The length of each line
+            width: 4, // The line thickness
+            radius: 10, // The radius of the inner circle
+            color: '#000', // #rgb or #rrggbb
+            speed: 1, // Rounds per second
+            trail: 60, // Afterglow percentage
+            shadow: false // Whether to render a shadow
+        };
+        var target = document.getElementById('spinnerDiv');
+        var spinner = new Spinner(opts);
+        var prm = Sys.WebForms.PageRequestManager.getInstance();
+        prm.add_endRequest(panelLoaded);
+
+        prm.add_beginRequest(panelUpdateRequest);
+        function panelLoaded(sender, args) {
+            spinner.stop();
+        }
+        function panelUpdateRequest(sender, args) {                   
+            spinner.spin(target);
+        }              
+    }           
+
+</script>
 </body>
 </html>
