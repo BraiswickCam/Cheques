@@ -8,6 +8,13 @@
     <link href="Content/bootstrap.css" rel="stylesheet" />
     <script src="Scripts/jquery-1.9.1.js"></script>
     <style>
+        .avoidBreak {
+        }
+
+        .setAvoidBreak {
+            page-break-inside: avoid;
+        }
+
         @media screen {
             body {
                 margin-top: 15px;
@@ -57,14 +64,21 @@
         </div>
     <div class="container container-fluid">
         <div class="row">
-            <div class="col-xs-10">
-                <h1 id="topTitle" runat="server">Banking Summary</h1>
+            <div class="col-xs-9">
             </div>
             <div class="col-xs-1">
                 <button onclick="window.print();" class="btn btn-warning hidden-print"><span class="glyphicon glyphicon-print"></span> Print</button>
             </div>
             <div class="col-xs-1">
                 <a href="Default.aspx" class="btn btn-info hidden-print"><span class="glyphicon glyphicon-home"></span> Home</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-8">
+                <h1 id="topTitle" runat="server">Banking Summary</h1>
+            </div>
+            <div class="col-xs-4 text-center hidden-print">
+                <input type="checkbox" id="breakCheck" checked /> Avoid page breaks in tables
             </div>
         </div>
         <div class="row">
@@ -77,21 +91,23 @@
                 <asp:GridView ID="schoolList" runat="server" CssClass="table table-striped table-condensed" GridLines="None"></asp:GridView>
             </div>
         </div>
-        <div class="row">
-            <div class="col-xs-12 col-lg-12">
-                <h2>Cash List</h2>
+        <div class="avoidBreak">
+            <div class="row">
+                <div class="col-xs-12 col-lg-12">
+                    <h2>Cash List</h2>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-lg-12">
-                <asp:GridView ID="cashList" runat="server" CssClass="table table-striped table-condensed" GridLines="None"></asp:GridView>
+            <div class="row">
+                <div class="col-xs-12 col-lg-12">
+                    <asp:GridView ID="cashList" runat="server" CssClass="table table-striped table-condensed" GridLines="None"></asp:GridView>
+                </div>
             </div>
         </div>
     </div>
     <div class="container container-fluid" id="batchTables" runat="server">
 
     </div>
-        <div class="container container-fluid">
+        <div class="container container-fluid avoidBreak">
             <div class="row">
                 <div class="col-xs-12">
                     <h2>VISA LIST</h2>
@@ -104,5 +120,24 @@
             </div>
         </div>
     </form>
+
+    <script>
+        $(document).ready(function () {
+            setAvoidBreaks();
+            $('#breakCheck').change(function () {
+                setAvoidBreaks();
+            });
+        });
+
+        function setAvoidBreaks() {
+            if ($('#breakCheck').is(":checked")) {
+                $('.avoidBreak').addClass('setAvoidBreak');
+            } else {
+                $('.avoidBreak').removeClass('setAvoidBreak');
+            }
+        };
+        
+    </script>
+
 </body>
 </html>

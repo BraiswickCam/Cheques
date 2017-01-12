@@ -120,7 +120,7 @@ namespace Cheques
             {
                 DataTable dt = cb.Table;
                 HtmlGenericControl row = new HtmlGenericControl("div");
-                row.Attributes["class"] = "row";
+                row.Attributes["class"] = "row avoidBreak";
                 batchTables.Controls.Add(row);
 
                 HtmlGenericControl col = new HtmlGenericControl("div");
@@ -154,7 +154,7 @@ namespace Cheques
         private void SummaryTable(DataTable _sumTable, int _count, double _sumCount, double _sumTotal)
         {
             HtmlGenericControl row = new HtmlGenericControl("div");
-            row.Attributes["class"] = "row";
+            row.Attributes["class"] = "row avoidBreak";
             batchTables.Controls.Add(row);
 
             HtmlGenericControl col = new HtmlGenericControl("div");
