@@ -177,27 +177,45 @@ namespace Cheques
 
         protected void ListSaveEntry()
         {
-            bl[errorIndex].CashChequeTotal = Convert.ToDouble(listCashChqTotal.Text);
-            bl[errorIndex].Discount = Convert.ToDouble(listDiscount.Text);
-            bl[errorIndex].Notes50 = Convert.ToDouble(listNotes50.Text);
-            bl[errorIndex].Notes20 = Convert.ToDouble(listNotes20.Text);
-            bl[errorIndex].Notes10 = Convert.ToDouble(listNotes10.Text);
-            bl[errorIndex].Notes5 = Convert.ToDouble(listNotes5.Text);
-            bl[errorIndex].Coins2 = Convert.ToDouble(listCoins2.Text);
-            bl[errorIndex].Coins1 = Convert.ToDouble(listCoins1.Text);
-            bl[errorIndex].Coins50 = Convert.ToDouble(listCoins50.Text);
-            bl[errorIndex].Coins20 = Convert.ToDouble(listCoins20.Text);
-            bl[errorIndex].Coins10 = Convert.ToDouble(listCoins10.Text);
-            bl[errorIndex].Coins5 = Convert.ToDouble(listCoins5.Text);
-            bl[errorIndex].CoinsBronze = Convert.ToDouble(listCoinsBronze.Text);
-            bl[errorIndex].ChequeTotal = Convert.ToDouble(listCheque.Text);
-            bl[errorIndex].VisaTotal = Convert.ToDouble(listVisa.Text);
+            bl[errorIndex].CashChequeTotal = SafeConvertToDouble(listCashChqTotal.Text);
+            bl[errorIndex].Discount = SafeConvertToDouble(listDiscount.Text);
+            bl[errorIndex].Notes50 = SafeConvertToDouble(listNotes50.Text);
+            bl[errorIndex].Notes20 = SafeConvertToDouble(listNotes20.Text);
+            bl[errorIndex].Notes10 = SafeConvertToDouble(listNotes10.Text);
+            bl[errorIndex].Notes5 = SafeConvertToDouble(listNotes5.Text);
+            bl[errorIndex].Coins2 = SafeConvertToDouble(listCoins2.Text);
+            bl[errorIndex].Coins1 = SafeConvertToDouble(listCoins1.Text);
+            bl[errorIndex].Coins50 = SafeConvertToDouble(listCoins50.Text);
+            bl[errorIndex].Coins20 = SafeConvertToDouble(listCoins20.Text);
+            bl[errorIndex].Coins10 = SafeConvertToDouble(listCoins10.Text);
+            bl[errorIndex].Coins5 = SafeConvertToDouble(listCoins5.Text);
+            bl[errorIndex].CoinsBronze = SafeConvertToDouble(listCoinsBronze.Text);
+            bl[errorIndex].ChequeTotal = SafeConvertToDouble(listCheque.Text);
+            bl[errorIndex].VisaTotal = SafeConvertToDouble(listVisa.Text);
 
             blr.Results = bl;
             blr.WriteResults();
             ListEditLoad();
             if (errorIndex != -1) ListEditPopulate();
             else Response.Redirect("Default.aspx");
+        }
+
+        protected double SafeConvertToDouble(string input)
+        {
+            double output = 0;
+            try { output = Convert.ToDouble(input); }
+            catch (System.FormatException ex)
+            {
+                if (String.IsNullOrWhiteSpace(input))
+                {
+                    output = 0;
+                }
+                else
+                {
+                    throw ex;
+                }
+            }
+            return output;
         }
 
         protected bool ErrorsCheck()
