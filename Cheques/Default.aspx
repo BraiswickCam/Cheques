@@ -13,9 +13,11 @@
             margin-top: 15px;
         }
     </style>
+
 </head>
 <body>
     <form id="form1" runat="server">
+        <div id="popover-container"></div>
     <div class="container container-fluid">
         <div class="row">
             <div class="col-md-offset-3 col-md-6">
@@ -37,22 +39,22 @@
             <div class="col-md-offset-4 col-md-4" id="settingsDiv">
                 <div class="form-group has-feedback" id="path1In">
                     <label for="<%=banklistPathText.ClientID %>" class="control-label">BANKLIST.TXT path</label>
-                    <asp:TextBox ID="banklistPathText" runat="server" CssClass="form-control"></asp:TextBox>
+                    <asp:TextBox ID="banklistPathText" runat="server" CssClass="form-control" data-toggle="popover" data-content="Location of the BANKLIST.TXT file." data-placement="right" data-trigger="focus"></asp:TextBox>
                     <span id="path1Icon" class="glyphicon form-control-feedback"></span>
                 </div>
                 <div class="form-group has-feedback" id="path2In">
                     <label for="<%=bankchqPathText.ClientID %>" class="control-label">BANKCHQ.TXT path</label>
-                    <asp:TextBox ID="bankchqPathText" runat="server" CssClass="form-control"></asp:TextBox>
+                    <asp:TextBox ID="bankchqPathText" runat="server" CssClass="form-control" data-toggle="popover" data-content="Location of the BANKCHQ.TXT file." data-placement="right" data-trigger="focus"></asp:TextBox>
                     <span id="path2Icon" class="glyphicon form-control-feedback"></span>
                 </div>
                 <div class="form-group has-feedback" id="path3In">
                     <label for="<%=backupPathText.ClientID %>" class="control-label">Back up path</label>
-                    <asp:TextBox ID="backupPathText" runat="server" CssClass="form-control"></asp:TextBox>
+                    <asp:TextBox ID="backupPathText" runat="server" CssClass="form-control" data-toggle="popover" data-content="Location of the .TXT file back-up folder." data-placement="right" data-trigger="focus"></asp:TextBox>
                     <span id="path3Icon" class="glyphicon form-control-feedback"></span>
                 </div>
                 <div class="form-group has-feedback" id="batchIn">
                     <label for="<%=batchSplitText.ClientID %>" class="control-label">Batch split size</label>
-                    <asp:TextBox ID="batchSplitText" runat="server" CssClass="form-control numeric-only"></asp:TextBox>
+                    <asp:TextBox ID="batchSplitText" runat="server" CssClass="form-control numeric-only" data-toggle="popover" data-content="How many cheques to include in each batch." data-placement="right" data-trigger="focus"></asp:TextBox>
                     <span id="batchIcon" class="glyphicon form-control-feedback"></span>
                 </div>
                 <div class="row top15 text-center">
@@ -82,6 +84,10 @@
     </form>
     <script>
         $(document).ready(function () {
+            $('[data-toggle="popover"]').popover({
+                container: "#popover-container"
+            });
+
             var path1 = <%=path1.ToString().ToLower()%>;
             var path2 = <%=path2.ToString().ToLower()%>;
             var path3 = <%=path3.ToString().ToLower()%>;
