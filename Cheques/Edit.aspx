@@ -6,7 +6,7 @@
 <head runat="server">
     <title></title>
     <link href="Content/bootstrap.css" rel="stylesheet" />
-    <script src="Scripts/jquery-1.9.1.js"></script>
+    <script src="Scripts/jquery-3.1.1.min.js"></script>
     <script src="Scripts/bootstrap.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
 

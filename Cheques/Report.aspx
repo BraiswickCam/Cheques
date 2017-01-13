@@ -6,7 +6,7 @@
 <head runat="server">
     <title></title>
     <link href="Content/bootstrap.css" rel="stylesheet" />
-    <script src="Scripts/jquery-1.9.1.js"></script>
+    <script src="Scripts/jquery-3.1.1.min.js"></script>
     <style>
         .avoidBreak {
         }
