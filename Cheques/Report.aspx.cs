@@ -32,7 +32,7 @@ namespace Cheques
             string bankChqListPath = ConfigurationManager.AppSettings["bankChqListPath"];
             if (File.Exists(bankListPath) && File.Exists(bankChqListPath))
             {
-                string backupDir = String.Format("{0}\\{1}", ConfigurationManager.AppSettings["backupPath"], DateTime.Now.ToString("yyyyddMM_HHmmss"));
+                string backupDir = String.Format("{0}\\{1}", ConfigurationManager.AppSettings["backupPath"], DateTime.Now.ToString("yyyyMMdd_HHmmss"));
                 Directory.CreateDirectory(backupDir);
                 File.Copy(bankListPath, String.Format("{0}\\BANKLIST.TXT", backupDir));
                 File.Copy(bankChqListPath, String.Format("{0}\\BANKCHQ.TXT", backupDir));
