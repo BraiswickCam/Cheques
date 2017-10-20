@@ -64,6 +64,8 @@ namespace Cheques
                 File.Copy(bankListPath, String.Format("{0}\\BANKLIST.TXT", backupDir));
                 File.Copy(bankChqListPath, String.Format("{0}\\BANKCHQ.TXT", backupDir));
 
+                //Needs some verification here to make sure that the originals are only cleared once they are backed up
+
                 File.WriteAllText(bankListPath, "");
                 File.WriteAllText(bankChqListPath, "");
 
