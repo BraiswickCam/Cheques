@@ -53,7 +53,11 @@ namespace Cheques
 
         protected bool FinalizeDay()
         {
-            if (path1 == false || path2 == false || path3 == false) { return false; }
+            if (path1 == false || path2 == false || path3 == false)
+            {
+                finfailalert.Attributes["class"] = "alert alert-danger alert-dismissible";
+                return false;
+            }
             else
             {
                 string bankListPath = ConfigurationManager.AppSettings["bankListPath"];
@@ -68,6 +72,8 @@ namespace Cheques
 
                 File.WriteAllText(bankListPath, "");
                 File.WriteAllText(bankChqListPath, "");
+
+                finsuccessalert.Attributes["class"] = "alert alert-success alert-dismissible";
 
                 return true;
             }

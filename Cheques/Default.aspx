@@ -27,10 +27,20 @@
         <div class="row">
             <div class="col-md-offset-3 col-md-6 text-center">
                 <div class="row">
+                    <div class="alert alert-success alert-dismissible hidden" role="alert" id="finsuccessalert" runat="server">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Success!</strong> Today's summary has been finalised.
+                    </div>
+                    <div class="alert alert-danger alert-dismissible hidden" role="alert" id="finfailalert" runat="server">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Uh-Oh!</strong> Something has gone wrong. Better call Cam!
+                    </div>
+                </div>
+                <div class="row">
                     <a href="Report.aspx" class="btn btn-primary"><span class="glyphicon glyphicon-list-alt"></span> Today's Summary</a> <p>Generate today's banking summary.</p></br>
                 </div>
                 <div class="row">
-                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#finmodal"><span class="glyphicon glyphicon-alert"></span> Finalize Day</button> <p>Complete todays banking.</p></br>
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#finmodal"><span class="glyphicon glyphicon-alert"></span> Finalise Day</button> <p>Complete todays banking.</p></br>
                 </div>
                 <div class="row">
                     <button type="button" id="adminSettings" class="btn btn-danger"><span class="glyphicon glyphicon-cog"></span> Admin Settings</button> <p>Change banking summary config.</p></br>
@@ -68,11 +78,11 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title"><span class="glyphicon glyphicon-alert"></span> Finalize Day</h4>
+                        <h4 class="modal-title"><span class="glyphicon glyphicon-alert"></span> Finalise Day</h4>
                     </div>
                     <div class="modal-body">
                         <h3 style="color: #d9534f;"><span class="glyphicon glyphicon-alert"></span> <strong>Have you finished banking for the day and printed a summary?</strong></h3>
-                        <p>If not, finish banking and use the "Today's Summary" button to print your summary <strong>before</strong> finalizing day.</p>
+                        <p>If not, finish banking and use the "Today's Summary" button to print your summary <strong>before</strong> finalising day.</p>
                     </div>
                     <div class="modal-footer">
                         <asp:Button ID="finDayButton" runat="server" CssClass="btn btn-danger" Text="Finalize Day" OnClick="finDayButton_Click" />
