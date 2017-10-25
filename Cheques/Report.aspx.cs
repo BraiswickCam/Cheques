@@ -82,6 +82,12 @@ namespace Cheques
                     ex.Denomination);
                 return false;
             }
+            catch (FormatException ex)
+            {
+                reportAlert.Attributes["class"] = "alert alert-danger";
+                reportAlert.InnerHtml = ex.Message;
+                return false;
+            }
 
             try { bcr = new BankChequeReader(); }
             catch (BankChequeException ex)

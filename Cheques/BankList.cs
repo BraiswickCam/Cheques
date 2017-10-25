@@ -284,6 +284,12 @@ namespace Cheques
                     sr.Close();
                     throw ex;
                 }
+                catch (FormatException ex)
+                {
+                    sr.Dispose();
+                    sr.Close();
+                    throw new FormatException(String.Format("{0}. JobNo: {1} {2}", ex.Message, values[0], values[3]));
+                }
             }
             sr.Dispose();
             sr.Close();
