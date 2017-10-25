@@ -64,14 +64,40 @@ namespace Cheques
                 string bankChqListPath = ConfigurationManager.AppSettings["bankChqListPath"];
                 string backupDir = String.Format("{0}\\{1}_FINAL", ConfigurationManager.AppSettings["backupPath"], DateTime.Now.ToString("yyyyMMdd_HHmmss"));
 
-                Directory.CreateDirectory(backupDir);
-                File.Copy(bankListPath, String.Format("{0}\\BANKLIST.TXT", backupDir));
-                File.Copy(bankChqListPath, String.Format("{0}\\BANKCHQ.TXT", backupDir));
+                try
+                {
+                    Directory.CreateDirectory(backupDir);
+                }
+                catch (Exception e)
+                {
+                    finfailalert.Attributes["class"] = "alert alert-danger alert-dismissible";
+                    finfailalert.InnerHtml += String.Format(" {0}", e.Message);
+                    return false;
+                }
 
-                //Needs some verification here to make sure that the originals are only cleared once they are backed up
+                try
+                {
+                    File.Copy(bankListPath, String.Format("{0}\\BANKLIST.TXT", backupDir));
+                    File.Copy(bankChqListPath, String.Format("{0}\\BANKCHQ.TXT", backupDir));
+                }
+                catch (Exception e)
+                {
+                    finfailalert.Attributes["class"] = "alert alert-danger alert-dismissible";
+                    finfailalert.InnerHtml += String.Format(" Unable to backup txt files. {0}", e.Message);
+                    return false;
+                }
 
-                File.WriteAllText(bankListPath, "");
-                File.WriteAllText(bankChqListPath, "");
+                try
+                {
+                    File.WriteAllText(bankListPath, "");
+                    File.WriteAllText(bankChqListPath, "");
+                }
+                catch (Exception e)
+                {
+                    finfailalert.Attributes["class"] = "alert alert-danger alert-dismissible";
+                    finfailalert.InnerHtml += String.Format(" Unable to clear original txt files. {0}", e.Message);
+                    return false;
+                }
 
                 finsuccessalert.Attributes["class"] = "alert alert-success alert-dismissible";
 
