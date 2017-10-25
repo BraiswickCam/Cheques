@@ -56,6 +56,7 @@ namespace Cheques
             if (path1 == false || path2 == false || path3 == false)
             {
                 finfailalert.Attributes["class"] = "alert alert-danger alert-dismissible";
+                finfailalert.InnerHtml += " Cannot find txt files/back up path. Check admin settings.";
                 return false;
             }
             else
